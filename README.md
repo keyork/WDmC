@@ -1,6 +1,4 @@
-# WDMC
-
-W(afer)D(efect)M(odes)C(lassifier)
+# WDMC: W(afer)D(efect)M(odes)C(lassifier)
 
 Machine Learning & Big Data (2022 Fall) Final Project: Wafer Defect Modes Classifier
 
@@ -35,3 +33,51 @@ To install `PyTorch(GPU)`, you need to know the CUDA Version by using `nvcc -V`,
 
 - `CUDA10.1`: `pip install torch==1.8.0+cu101 torchvision==0.9.0+cu101 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
 - `CUDA11.1`: `pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
+
+## Usage
+
+1. Make sure all path are exist, if not, create it:
+
+```
+cd data && mkdir processed && mkdir raw && cd ..
+mkdir weights
+```
+
+2. Download `datasets2022.npz` and put it in `./data/raw/`
+
+3. Train a model:
+
+```
+python run.py [-h] [--stage STAGE] [--rawpath RAWPATH] [--newpath NEWPATH]
+[--datadir DATADIR] [--trainscl TRAINSCL] [--bts BTS] [--lr LR]
+[--initmodel INITMODEL] [--loadwt LOADWT] [--weights WEIGHTS]
+[--saveweights SAVEWEIGHTS] [--dataset DATASET] [--epoch EPOCH]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --stage STAGE         project stage
+  --rawpath RAWPATH     raw data path
+  --newpath NEWPATH     new data path
+  --datadir DATADIR     processed data path
+  --trainscl TRAINSCL   train dataset scale
+  --bts BTS             batch size
+  --lr LR               learning rate
+  --initmodel INITMODEL
+                        init the model weights
+  --loadwt LOADWT       load model weights
+  --weights WEIGHTS     load model weights path
+  --saveweights SAVEWEIGHTS
+                        save model weights path
+  --dataset DATASET     using dataset
+  --epoch EPOCH         epoch num
+```
+
+or run the script directly:
+
+```
+bash run.sh
+```
+
+## Eval
+
+## Our Model
