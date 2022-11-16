@@ -1,6 +1,8 @@
-# WDMC: W(afer)D(efect)M(odes)C(lassifier)
+# WDmC: W(afer)D(efect)m(odes)C(lassifier)
 
-Machine Learning & Big Data (2022 Fall) Final Project: Wafer Defect Modes Classifier
+Machine Learning & Big Data (2022 Fall) Final Project: Wafer Defect modes Classifier
+
+**Assert!!!** To keep data confidential, we _**do not**_ upload the dataset file, please go to the [THU Web Learning](https://learn.tsinghua.edu.cn) to download the dataset by yourself.
 
 ## Envs
 
