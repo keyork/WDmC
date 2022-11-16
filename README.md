@@ -86,7 +86,9 @@ bash run.sh
 python run.py --target eval --initmodel False --loadwt True --weights ./weights/model10.pth
 ```
 
-We provide a trained model weights here: , download and put it in `./weights/model10.pth`, then run this eval project.
+We provide a trained model weights here: https://github.com/keyork/WDmC/releases/tag/v1.0.0
+
+Download and put it in `./weights/`, then run this eval project.
 
 ## Eval
 
