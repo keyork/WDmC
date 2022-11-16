@@ -16,3 +16,5 @@ python run.py --lr 1e-5 --initmodel False --loadwt True --weights ./weights/mode
 
 python run.py --lr 1e-4 --initmodel False --loadwt True --weights ./weights/model9.pth --saveweights ./weights/model10.pth --dataset full.npz --epoch 30
 python run.py --lr 1e-5 --initmodel False --loadwt True --weights ./weights/model10.pth --saveweights ./weights/model1.pth --dataset full.npz --epoch 30
+
+python run.py --target eval --initmodel False --loadwt True --weights ./weights/model10.pth

@@ -30,9 +30,12 @@ def main(config):
     print(f"Using {device} device")
     model = WDMCNet()
     print(model)
-    if config.initmodel:
-        model = init_weights(model)
-    if config.loadwt:
+    if config.target == 'train':
+        if config.initmodel:
+            model = init_weights(model)
+        if config.loadwt:
+            model = load_weights(model, config.weights)
+    elif config.target == 'eval':
         model = load_weights(model, config.weights)
     # model = nn.DataParallel(model)
     model = model.to(device)
@@ -44,18 +47,22 @@ def main(config):
         optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=0.0005)
     loss_fn = nn.MSELoss()
     
-    # train
-    for t in range(config.epoch):
-        print(f"Epoch {t+1}\n-------------------------------")
-        train(model, train_dataloader, valid_dataloader, optimizer, loss_fn, device)
-    
-    # test
-    test(test_dataloader, model, device, loss_fn)
-    torch.save(model.state_dict(), config.saveweights)
-    print("Done!")
+    if config.target == 'train':
+        # train
+        for t in range(config.epoch):
+            print(f"Epoch {t+1}\n-------------------------------")
+            train(model, train_dataloader, valid_dataloader, optimizer, loss_fn, device)
+        
+        # test
+        test(test_dataloader, model, device, loss_fn)
+        torch.save(model.state_dict(), config.saveweights)
+        print("Done!")
+    elif config.target == 'eval':
+        test(test_dataloader, model, device, loss_fn)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument("--target", type=str, default='train', help="train or eval")
     parser.add_argument("--stage", type=str, default='self', help="project stage")
     parser.add_argument("--rawpath", type=str, default='./data/raw/datasets2022.npz', help="raw data path")
     parser.add_argument("--newpath", type=str, default='./data/raw/dataset_new.npz', help="new data path")

@@ -48,13 +48,15 @@ mkdir weights
 3. Train a model:
 
 ```
-python run.py [-h] [--stage STAGE] [--rawpath RAWPATH] [--newpath NEWPATH]
-[--datadir DATADIR] [--trainscl TRAINSCL] [--bts BTS] [--lr LR]
-[--initmodel INITMODEL] [--loadwt LOADWT] [--weights WEIGHTS]
-[--saveweights SAVEWEIGHTS] [--dataset DATASET] [--epoch EPOCH]
+usage: run.py [-h] [--target TARGET] [--stage STAGE] [--rawpath RAWPATH]
+              [--newpath NEWPATH] [--datadir DATADIR] [--trainscl TRAINSCL]
+              [--bts BTS] [--lr LR] [--initmodel INITMODEL] [--loadwt LOADWT]
+              [--weights WEIGHTS] [--saveweights SAVEWEIGHTS]
+              [--dataset DATASET] [--epoch EPOCH]
 
 optional arguments:
   -h, --help            show this help message and exit
+  --target TARGET       train or eval
   --stage STAGE         project stage
   --rawpath RAWPATH     raw data path
   --newpath NEWPATH     new data path
@@ -78,6 +80,19 @@ or run the script directly:
 bash run.sh
 ```
 
+4. Eval the model:
+
+```
+python run.py --target eval --initmodel False --loadwt True --weights ./weights/model10.pth
+```
+
+We provide a trained model weights here: , download and put it in `./weights/model10.pth`, then run this eval project.
+
 ## Eval
 
+- `ACC`: `90.9913%`
+- `AverageHammingDistance`: `0.013603`
+
 ## Our Model
+
+TODO.
