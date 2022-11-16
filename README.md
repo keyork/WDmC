@@ -85,7 +85,7 @@ bash run.sh
 4. Eval the model:
 
 ```
-python run.py --target eval --initmodel False --loadwt True --weights ./weights/model10.pth
+python run.py --target eval --initmodel False --loadwt True --weights ./weights/model12.pth
 ```
 
 We provide a trained model weights here: https://github.com/keyork/WDmC/releases/tag/v1.0.0 or
@@ -95,8 +95,8 @@ Download and put it in `./weights/`, then run this eval project.
 
 ## Eval
 
-- `ACC`: `90.9913%`
-- `AverageHammingDistance`: `0.013603`
+- `ACC`: `92.6188%`
+- `AverageHammingDistance`: `0.011487`
 
 ## Our Model
 

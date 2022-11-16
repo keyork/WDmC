@@ -1,0 +1,1868 @@
+Using cuda device
+WDMCNet(
+  (features): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (4): ReLU(inplace=True)
+    (5): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (6): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (15): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (16): ReLU(inplace=True)
+    (17): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (classifier): Sequential(
+    (0): Dropout(p=0.5, inplace=False)
+    (1): Linear(in_features=18432, out_features=4096, bias=True)
+    (2): ReLU(inplace=True)
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=4096, out_features=64, bias=True)
+    (5): ReLU(inplace=True)
+    (6): Linear(in_features=64, out_features=8, bias=True)
+  )
+)
+Epoch 1
+-------------------------------
+loss: 0.045182  [    0/17030]
+Valid! hamming_dts=0.031819, loss=0.000400, acc=0.838471
+loss: 0.010592  [ 1280/17030]
+Valid! hamming_dts=0.011800, loss=0.000181, acc=0.923277
+loss: 0.014758  [ 2560/17030]
+Valid! hamming_dts=0.011286, loss=0.000179, acc=0.925606
+loss: 0.011296  [ 3840/17030]
+Valid! hamming_dts=0.011680, loss=0.000189, acc=0.924236
+loss: 0.010783  [ 5120/17030]
+Valid! hamming_dts=0.012502, loss=0.000189, acc=0.917386
+loss: 0.012006  [ 6400/17030]
+Valid! hamming_dts=0.012913, loss=0.000185, acc=0.913139
+loss: 0.018441  [ 7680/17030]
+Valid! hamming_dts=0.013187, loss=0.000212, acc=0.911495
+loss: 0.008774  [ 8960/17030]
+Valid! hamming_dts=0.011834, loss=0.000177, acc=0.922181
+loss: 0.009482  [10240/17030]
+Valid! hamming_dts=0.011937, loss=0.000192, acc=0.920674
+loss: 0.007426  [11520/17030]
+Valid! hamming_dts=0.012536, loss=0.000178, acc=0.916701
+loss: 0.010703  [12800/17030]
+Valid! hamming_dts=0.012005, loss=0.000184, acc=0.921907
+loss: 0.007753  [14080/17030]
+Valid! hamming_dts=0.011577, loss=0.000174, acc=0.923551
+loss: 0.008225  [15360/17030]
+Valid! hamming_dts=0.012485, loss=0.000192, acc=0.917797
+loss: 0.010294  [16640/17030]
+Valid! hamming_dts=0.011748, loss=0.000180, acc=0.923140
+Epoch 2
+-------------------------------
+loss: 0.038668  [    0/17030]
+Valid! hamming_dts=0.016201, loss=0.000236, acc=0.889574
+loss: 0.012074  [ 1280/17030]
+Valid! hamming_dts=0.013307, loss=0.000202, acc=0.912180
+loss: 0.006899  [ 2560/17030]
+Valid! hamming_dts=0.012022, loss=0.000174, acc=0.919852
+loss: 0.012097  [ 3840/17030]
+Valid! hamming_dts=0.011543, loss=0.000176, acc=0.923140
+loss: 0.012947  [ 5120/17030]
+Valid! hamming_dts=0.012553, loss=0.000180, acc=0.917386
+loss: 0.007182  [ 6400/17030]
+Valid! hamming_dts=0.012159, loss=0.000172, acc=0.920263
+loss: 0.009548  [ 7680/17030]
+Valid! hamming_dts=0.011988, loss=0.000182, acc=0.920537
+loss: 0.010022  [ 8960/17030]
+Valid! hamming_dts=0.012416, loss=0.000181, acc=0.917112
+loss: 0.007800  [10240/17030]
+Valid! hamming_dts=0.012467, loss=0.000179, acc=0.917797
+loss: 0.014070  [11520/17030]
+Valid! hamming_dts=0.011919, loss=0.000171, acc=0.922044
+loss: 0.007504  [12800/17030]
+Valid! hamming_dts=0.011663, loss=0.000187, acc=0.922729
+loss: 0.011880  [14080/17030]
+Valid! hamming_dts=0.012450, loss=0.000183, acc=0.917386
+loss: 0.010628  [15360/17030]
+Valid! hamming_dts=0.016115, loss=0.000236, acc=0.901493
+loss: 0.009265  [16640/17030]
+Valid! hamming_dts=0.012913, loss=0.000189, acc=0.916153
+Epoch 3
+-------------------------------
+loss: 0.037825  [    0/17030]
+Valid! hamming_dts=0.012656, loss=0.000188, acc=0.916701
+loss: 0.012726  [ 1280/17030]
+Valid! hamming_dts=0.012245, loss=0.000177, acc=0.918893
+loss: 0.010985  [ 2560/17030]
+Valid! hamming_dts=0.014608, loss=0.000201, acc=0.903274
+loss: 0.009026  [ 3840/17030]
+Valid! hamming_dts=0.011765, loss=0.000181, acc=0.923003
+loss: 0.007147  [ 5120/17030]
+Valid! hamming_dts=0.012330, loss=0.000177, acc=0.919441
+loss: 0.011160  [ 6400/17030]
+Valid! hamming_dts=0.012330, loss=0.000175, acc=0.919030
+loss: 0.008675  [ 7680/17030]
+Valid! hamming_dts=0.011851, loss=0.000175, acc=0.921496
+loss: 0.019121  [ 8960/17030]
+Valid! hamming_dts=0.011543, loss=0.000175, acc=0.924099
+loss: 0.011777  [10240/17030]
+Valid! hamming_dts=0.012553, loss=0.000188, acc=0.918071
+loss: 0.015226  [11520/17030]
+Valid! hamming_dts=0.012416, loss=0.000184, acc=0.917386
+loss: 0.010165  [12800/17030]
+Valid! hamming_dts=0.011731, loss=0.000185, acc=0.922318
+loss: 0.005433  [14080/17030]
+Valid! hamming_dts=0.011919, loss=0.000189, acc=0.921907
+loss: 0.005108  [15360/17030]
+Valid! hamming_dts=0.012827, loss=0.000183, acc=0.913687
+loss: 0.013575  [16640/17030]
+Valid! hamming_dts=0.012005, loss=0.000187, acc=0.920126
+Epoch 4
+-------------------------------
+loss: 0.046249  [    0/17030]
+Valid! hamming_dts=0.013803, loss=0.000205, acc=0.908207
+loss: 0.010352  [ 1280/17030]
+Valid! hamming_dts=0.012091, loss=0.000176, acc=0.919989
+loss: 0.013665  [ 2560/17030]
+Valid! hamming_dts=0.012125, loss=0.000190, acc=0.920674
+loss: 0.007601  [ 3840/17030]
+Valid! hamming_dts=0.012056, loss=0.000178, acc=0.920400
+loss: 0.013939  [ 5120/17030]
+Valid! hamming_dts=0.012091, loss=0.000176, acc=0.920811
+loss: 0.008175  [ 6400/17030]
+Valid! hamming_dts=0.011851, loss=0.000180, acc=0.921770
+loss: 0.008130  [ 7680/17030]
+Valid! hamming_dts=0.011371, loss=0.000179, acc=0.926291
+loss: 0.015150  [ 8960/17030]
+Valid! hamming_dts=0.012125, loss=0.000176, acc=0.920537
+loss: 0.012558  [10240/17030]
+Valid! hamming_dts=0.012108, loss=0.000181, acc=0.921496
+loss: 0.010304  [11520/17030]
+Valid! hamming_dts=0.011748, loss=0.000174, acc=0.923140
+loss: 0.016846  [12800/17030]
+Valid! hamming_dts=0.012416, loss=0.000175, acc=0.917523
+loss: 0.009848  [14080/17030]
+Valid! hamming_dts=0.013392, loss=0.000195, acc=0.911358
+loss: 0.015466  [15360/17030]
+Valid! hamming_dts=0.011508, loss=0.000181, acc=0.923825
+loss: 0.011245  [16640/17030]
+Valid! hamming_dts=0.012056, loss=0.000191, acc=0.919030
+Epoch 5
+-------------------------------
+loss: 0.037761  [    0/17030]
+Valid! hamming_dts=0.013050, loss=0.000191, acc=0.913824
+loss: 0.006884  [ 1280/17030]
+Valid! hamming_dts=0.012056, loss=0.000182, acc=0.920263
+loss: 0.007997  [ 2560/17030]
+Valid! hamming_dts=0.012896, loss=0.000192, acc=0.915057
+loss: 0.009813  [ 3840/17030]
+Valid! hamming_dts=0.012125, loss=0.000175, acc=0.918893
+loss: 0.014799  [ 5120/17030]
+Valid! hamming_dts=0.012776, loss=0.000186, acc=0.914783
+loss: 0.009752  [ 6400/17030]
+Valid! hamming_dts=0.011782, loss=0.000170, acc=0.923140
+loss: 0.011154  [ 7680/17030]
+Valid! hamming_dts=0.012193, loss=0.000186, acc=0.920263
+loss: 0.010465  [ 8960/17030]
+Valid! hamming_dts=0.012776, loss=0.000198, acc=0.915194
+loss: 0.010782  [10240/17030]
+Valid! hamming_dts=0.011954, loss=0.000181, acc=0.919852
+loss: 0.012468  [11520/17030]
+Valid! hamming_dts=0.012622, loss=0.000193, acc=0.917386
+loss: 0.018345  [12800/17030]
+Valid! hamming_dts=0.013358, loss=0.000193, acc=0.911358
+loss: 0.025624  [14080/17030]
+Valid! hamming_dts=0.013067, loss=0.000200, acc=0.913002
+loss: 0.010777  [15360/17030]
+Valid! hamming_dts=0.012074, loss=0.000172, acc=0.920126
+loss: 0.003663  [16640/17030]
+Valid! hamming_dts=0.011782, loss=0.000173, acc=0.922729
+Epoch 6
+-------------------------------
+loss: 0.040912  [    0/17030]
+Valid! hamming_dts=0.013221, loss=0.000189, acc=0.911769
+loss: 0.006743  [ 1280/17030]
+Valid! hamming_dts=0.011748, loss=0.000175, acc=0.923140
+loss: 0.015627  [ 2560/17030]
+Valid! hamming_dts=0.012690, loss=0.000180, acc=0.916701
+loss: 0.006094  [ 3840/17030]
+Valid! hamming_dts=0.012228, loss=0.000185, acc=0.919441
+loss: 0.009504  [ 5120/17030]
+Valid! hamming_dts=0.012125, loss=0.000178, acc=0.920674
+loss: 0.010056  [ 6400/17030]
+Valid! hamming_dts=0.011782, loss=0.000177, acc=0.921222
+loss: 0.013270  [ 7680/17030]
+Valid! hamming_dts=0.012639, loss=0.000186, acc=0.916016
+loss: 0.015935  [ 8960/17030]
+Valid! hamming_dts=0.012262, loss=0.000181, acc=0.918756
+loss: 0.010578  [10240/17030]
+Valid! hamming_dts=0.011611, loss=0.000172, acc=0.923962
+loss: 0.012019  [11520/17030]
+Valid! hamming_dts=0.012125, loss=0.000186, acc=0.920537
+loss: 0.015811  [12800/17030]
+Valid! hamming_dts=0.012896, loss=0.000188, acc=0.914098
+loss: 0.011134  [14080/17030]
+Valid! hamming_dts=0.012416, loss=0.000184, acc=0.917934
+loss: 0.008022  [15360/17030]
+Valid! hamming_dts=0.012639, loss=0.000182, acc=0.916701
+loss: 0.010175  [16640/17030]
+Valid! hamming_dts=0.011902, loss=0.000172, acc=0.921359
+Epoch 7
+-------------------------------
+loss: 0.042763  [    0/17030]
+Valid! hamming_dts=0.014026, loss=0.000189, acc=0.907248
+loss: 0.010420  [ 1280/17030]
+Valid! hamming_dts=0.011594, loss=0.000177, acc=0.921770
+loss: 0.004476  [ 2560/17030]
+Valid! hamming_dts=0.011337, loss=0.000178, acc=0.925332
+loss: 0.011902  [ 3840/17030]
+Valid! hamming_dts=0.013872, loss=0.000197, acc=0.908207
+loss: 0.010392  [ 5120/17030]
+Valid! hamming_dts=0.012056, loss=0.000187, acc=0.919441
+loss: 0.021796  [ 6400/17030]
+Valid! hamming_dts=0.012519, loss=0.000181, acc=0.917523
+loss: 0.008363  [ 7680/17030]
+Valid! hamming_dts=0.011800, loss=0.000176, acc=0.920263
+loss: 0.008638  [ 8960/17030]
+Valid! hamming_dts=0.011680, loss=0.000170, acc=0.923140
+loss: 0.010420  [10240/17030]
+Valid! hamming_dts=0.011491, loss=0.000175, acc=0.925058
+loss: 0.007515  [11520/17030]
+Valid! hamming_dts=0.011851, loss=0.000185, acc=0.921770
+loss: 0.010440  [12800/17030]
+Valid! hamming_dts=0.011954, loss=0.000181, acc=0.922318
+loss: 0.014264  [14080/17030]
+Valid! hamming_dts=0.013289, loss=0.000193, acc=0.911906
+loss: 0.013069  [15360/17030]
+Valid! hamming_dts=0.012673, loss=0.000183, acc=0.917934
+loss: 0.012717  [16640/17030]
+Valid! hamming_dts=0.011491, loss=0.000171, acc=0.923551
+Epoch 8
+-------------------------------
+loss: 0.051706  [    0/17030]
+Valid! hamming_dts=0.012861, loss=0.000188, acc=0.913413
+loss: 0.006821  [ 1280/17030]
+Valid! hamming_dts=0.012450, loss=0.000183, acc=0.919167
+loss: 0.005704  [ 2560/17030]
+Valid! hamming_dts=0.011919, loss=0.000178, acc=0.921770
+loss: 0.011553  [ 3840/17030]
+Valid! hamming_dts=0.012365, loss=0.000176, acc=0.918619
+loss: 0.007517  [ 5120/17030]
+Valid! hamming_dts=0.012930, loss=0.000184, acc=0.915194
+loss: 0.009780  [ 6400/17030]
+Valid! hamming_dts=0.012142, loss=0.000179, acc=0.919304
+loss: 0.009547  [ 7680/17030]
+Valid! hamming_dts=0.013307, loss=0.000205, acc=0.910947
+loss: 0.010170  [ 8960/17030]
+Valid! hamming_dts=0.014505, loss=0.000213, acc=0.904096
+loss: 0.018010  [10240/17030]
+Valid! hamming_dts=0.011680, loss=0.000177, acc=0.922318
+loss: 0.010453  [11520/17030]
+Valid! hamming_dts=0.012861, loss=0.000180, acc=0.915057
+loss: 0.009363  [12800/17030]
+Valid! hamming_dts=0.012382, loss=0.000178, acc=0.917386
+loss: 0.009364  [14080/17030]
+Valid! hamming_dts=0.011834, loss=0.000177, acc=0.921907
+loss: 0.023940  [15360/17030]
+Valid! hamming_dts=0.012741, loss=0.000184, acc=0.916016
+loss: 0.008321  [16640/17030]
+Valid! hamming_dts=0.010960, loss=0.000171, acc=0.927250
+Epoch 9
+-------------------------------
+loss: 0.038892  [    0/17030]
+Valid! hamming_dts=0.015122, loss=0.000231, acc=0.901082
+loss: 0.016192  [ 1280/17030]
+Valid! hamming_dts=0.011491, loss=0.000199, acc=0.924236
+loss: 0.014850  [ 2560/17030]
+Valid! hamming_dts=0.012039, loss=0.000172, acc=0.919167
+loss: 0.008783  [ 3840/17030]
+Valid! hamming_dts=0.012810, loss=0.000181, acc=0.915194
+loss: 0.014997  [ 5120/17030]
+Valid! hamming_dts=0.012142, loss=0.000197, acc=0.919304
+loss: 0.004273  [ 6400/17030]
+Valid! hamming_dts=0.012690, loss=0.000187, acc=0.915057
+loss: 0.010051  [ 7680/17030]
+Valid! hamming_dts=0.012296, loss=0.000175, acc=0.919304
+loss: 0.010039  [ 8960/17030]
+Valid! hamming_dts=0.011371, loss=0.000175, acc=0.924784
+loss: 0.009295  [10240/17030]
+Valid! hamming_dts=0.012228, loss=0.000173, acc=0.919989
+loss: 0.018219  [11520/17030]
+Valid! hamming_dts=0.012159, loss=0.000177, acc=0.919030
+loss: 0.006302  [12800/17030]
+Valid! hamming_dts=0.011902, loss=0.000177, acc=0.922318
+loss: 0.010436  [14080/17030]
+Valid! hamming_dts=0.011937, loss=0.000169, acc=0.921085
+loss: 0.015672  [15360/17030]
+Valid! hamming_dts=0.012382, loss=0.000178, acc=0.919989
+loss: 0.016681  [16640/17030]
+Valid! hamming_dts=0.011645, loss=0.000174, acc=0.922455
+Epoch 10
+-------------------------------
+loss: 0.029565  [    0/17030]
+Valid! hamming_dts=0.012964, loss=0.000193, acc=0.913139
+loss: 0.010003  [ 1280/17030]
+Valid! hamming_dts=0.013495, loss=0.000195, acc=0.909166
+loss: 0.009765  [ 2560/17030]
+Valid! hamming_dts=0.011577, loss=0.000177, acc=0.923688
+loss: 0.008050  [ 3840/17030]
+Valid! hamming_dts=0.011286, loss=0.000166, acc=0.926017
+loss: 0.007666  [ 5120/17030]
+Valid! hamming_dts=0.012022, loss=0.000192, acc=0.919715
+loss: 0.006475  [ 6400/17030]
+Valid! hamming_dts=0.012536, loss=0.000182, acc=0.916427
+loss: 0.004953  [ 7680/17030]
+Valid! hamming_dts=0.011868, loss=0.000172, acc=0.921770
+loss: 0.005986  [ 8960/17030]
+Valid! hamming_dts=0.011937, loss=0.000172, acc=0.922729
+loss: 0.019421  [10240/17030]
+Valid! hamming_dts=0.015550, loss=0.000222, acc=0.893958
+loss: 0.012575  [11520/17030]
+Valid! hamming_dts=0.011063, loss=0.000176, acc=0.926702
+loss: 0.008310  [12800/17030]
+Valid! hamming_dts=0.012193, loss=0.000178, acc=0.919030
+loss: 0.013524  [14080/17030]
+Valid! hamming_dts=0.011885, loss=0.000175, acc=0.922181
+loss: 0.008216  [15360/17030]
+Valid! hamming_dts=0.011988, loss=0.000174, acc=0.919578
+loss: 0.005897  [16640/17030]
+Valid! hamming_dts=0.011817, loss=0.000170, acc=0.922592
+Test! hamming_dts=0.013254, loss=0.000195, acc=0.913529
+Done!
+Using cuda device
+WDMCNet(
+  (features): Sequential(
+    (0): Conv2d(1, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (1): ReLU(inplace=True)
+    (2): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (4): ReLU(inplace=True)
+    (5): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (6): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (7): ReLU(inplace=True)
+    (8): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (9): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (10): ReLU(inplace=True)
+    (11): MaxPool2d(kernel_size=3, stride=2, padding=0, dilation=1, ceil_mode=False)
+    (12): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (13): ReLU(inplace=True)
+    (14): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (15): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (16): ReLU(inplace=True)
+    (17): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+  )
+  (classifier): Sequential(
+    (0): Dropout(p=0.5, inplace=False)
+    (1): Linear(in_features=18432, out_features=4096, bias=True)
+    (2): ReLU(inplace=True)
+    (3): Dropout(p=0.5, inplace=False)
+    (4): Linear(in_features=4096, out_features=64, bias=True)
+    (5): ReLU(inplace=True)
+    (6): Linear(in_features=64, out_features=8, bias=True)
+  )
+)
+Epoch 1
+-------------------------------
+loss: 0.035082  [    0/17030]
+Valid! hamming_dts=0.012861, loss=0.000197, acc=0.914783
+loss: 0.010588  [ 1280/17030]
+Valid! hamming_dts=0.011663, loss=0.000164, acc=0.923962
+loss: 0.007756  [ 2560/17030]
+Valid! hamming_dts=0.011200, loss=0.000161, acc=0.926017
+loss: 0.006064  [ 3840/17030]
+Valid! hamming_dts=0.011320, loss=0.000160, acc=0.924921
+loss: 0.006049  [ 5120/17030]
+Valid! hamming_dts=0.011217, loss=0.000158, acc=0.926154
+loss: 0.002935  [ 6400/17030]
+Valid! hamming_dts=0.011560, loss=0.000164, acc=0.922729
+loss: 0.011918  [ 7680/17030]
+Valid! hamming_dts=0.011303, loss=0.000160, acc=0.925058
+loss: 0.011958  [ 8960/17030]
+Valid! hamming_dts=0.010892, loss=0.000164, acc=0.927798
+loss: 0.008265  [10240/17030]
+Valid! hamming_dts=0.011303, loss=0.000159, acc=0.924784
+loss: 0.010028  [11520/17030]
+Valid! hamming_dts=0.011046, loss=0.000161, acc=0.926702
+loss: 0.010898  [12800/17030]
+Valid! hamming_dts=0.010909, loss=0.000162, acc=0.927250
+loss: 0.004725  [14080/17030]
+Valid! hamming_dts=0.011115, loss=0.000159, acc=0.925880
+loss: 0.008613  [15360/17030]
+Valid! hamming_dts=0.011149, loss=0.000165, acc=0.926565
+loss: 0.009904  [16640/17030]
+Valid! hamming_dts=0.011149, loss=0.000159, acc=0.926565
+Epoch 2
+-------------------------------
+loss: 0.042707  [    0/17030]
+Valid! hamming_dts=0.010943, loss=0.000159, acc=0.927935
+loss: 0.010051  [ 1280/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.927661
+loss: 0.006148  [ 2560/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929442
+loss: 0.009601  [ 3840/17030]
+Valid! hamming_dts=0.010943, loss=0.000157, acc=0.927113
+loss: 0.006073  [ 5120/17030]
+Valid! hamming_dts=0.010823, loss=0.000158, acc=0.927935
+loss: 0.011809  [ 6400/17030]
+Valid! hamming_dts=0.011149, loss=0.000162, acc=0.926976
+loss: 0.007747  [ 7680/17030]
+Valid! hamming_dts=0.010995, loss=0.000158, acc=0.927250
+loss: 0.009424  [ 8960/17030]
+Valid! hamming_dts=0.010926, loss=0.000161, acc=0.927524
+loss: 0.004672  [10240/17030]
+Valid! hamming_dts=0.010652, loss=0.000159, acc=0.929305
+loss: 0.007476  [11520/17030]
+Valid! hamming_dts=0.010875, loss=0.000165, acc=0.927661
+loss: 0.008999  [12800/17030]
+Valid! hamming_dts=0.011046, loss=0.000159, acc=0.926976
+loss: 0.005712  [14080/17030]
+Valid! hamming_dts=0.011115, loss=0.000157, acc=0.926565
+loss: 0.007214  [15360/17030]
+Valid! hamming_dts=0.011097, loss=0.000159, acc=0.926428
+loss: 0.003437  [16640/17030]
+Valid! hamming_dts=0.011149, loss=0.000158, acc=0.926017
+Epoch 3
+-------------------------------
+loss: 0.030279  [    0/17030]
+Valid! hamming_dts=0.010978, loss=0.000158, acc=0.927113
+loss: 0.011631  [ 1280/17030]
+Valid! hamming_dts=0.011063, loss=0.000158, acc=0.926565
+loss: 0.013885  [ 2560/17030]
+Valid! hamming_dts=0.010755, loss=0.000159, acc=0.928894
+loss: 0.005706  [ 3840/17030]
+Valid! hamming_dts=0.011115, loss=0.000158, acc=0.926154
+loss: 0.012828  [ 5120/17030]
+Valid! hamming_dts=0.011200, loss=0.000163, acc=0.926291
+loss: 0.011017  [ 6400/17030]
+Valid! hamming_dts=0.010841, loss=0.000159, acc=0.928072
+loss: 0.006180  [ 7680/17030]
+Valid! hamming_dts=0.011149, loss=0.000163, acc=0.926017
+loss: 0.004527  [ 8960/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929716
+loss: 0.005010  [10240/17030]
+Valid! hamming_dts=0.011132, loss=0.000158, acc=0.926291
+loss: 0.010230  [11520/17030]
+Valid! hamming_dts=0.011012, loss=0.000158, acc=0.927250
+loss: 0.006124  [12800/17030]
+Valid! hamming_dts=0.010755, loss=0.000158, acc=0.928757
+loss: 0.013094  [14080/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928620
+loss: 0.007020  [15360/17030]
+Valid! hamming_dts=0.010686, loss=0.000157, acc=0.929305
+loss: 0.008798  [16640/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926976
+Epoch 4
+-------------------------------
+loss: 0.045079  [    0/17030]
+Valid! hamming_dts=0.011080, loss=0.000158, acc=0.926702
+loss: 0.008008  [ 1280/17030]
+Valid! hamming_dts=0.010755, loss=0.000158, acc=0.928620
+loss: 0.012393  [ 2560/17030]
+Valid! hamming_dts=0.011166, loss=0.000158, acc=0.925743
+loss: 0.004492  [ 3840/17030]
+Valid! hamming_dts=0.011183, loss=0.000158, acc=0.925195
+loss: 0.009123  [ 5120/17030]
+Valid! hamming_dts=0.010823, loss=0.000158, acc=0.928209
+loss: 0.016305  [ 6400/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.927661
+loss: 0.016701  [ 7680/17030]
+Valid! hamming_dts=0.010978, loss=0.000159, acc=0.927524
+loss: 0.010677  [ 8960/17030]
+Valid! hamming_dts=0.011080, loss=0.000160, acc=0.926154
+loss: 0.011545  [10240/17030]
+Valid! hamming_dts=0.011029, loss=0.000159, acc=0.926839
+loss: 0.008321  [11520/17030]
+Valid! hamming_dts=0.010978, loss=0.000157, acc=0.926839
+loss: 0.005067  [12800/17030]
+Valid! hamming_dts=0.010909, loss=0.000161, acc=0.928209
+loss: 0.008375  [14080/17030]
+Valid! hamming_dts=0.010738, loss=0.000157, acc=0.929305
+loss: 0.006182  [15360/17030]
+Valid! hamming_dts=0.010892, loss=0.000162, acc=0.928620
+loss: 0.005659  [16640/17030]
+Valid! hamming_dts=0.010532, loss=0.000164, acc=0.930675
+Epoch 5
+-------------------------------
+loss: 0.037023  [    0/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928483
+loss: 0.005659  [ 1280/17030]
+Valid! hamming_dts=0.011697, loss=0.000168, acc=0.923551
+loss: 0.007189  [ 2560/17030]
+Valid! hamming_dts=0.010943, loss=0.000157, acc=0.927524
+loss: 0.018827  [ 3840/17030]
+Valid! hamming_dts=0.011097, loss=0.000163, acc=0.926976
+loss: 0.010330  [ 5120/17030]
+Valid! hamming_dts=0.011234, loss=0.000162, acc=0.925606
+loss: 0.009086  [ 6400/17030]
+Valid! hamming_dts=0.011046, loss=0.000158, acc=0.926565
+loss: 0.007452  [ 7680/17030]
+Valid! hamming_dts=0.011063, loss=0.000159, acc=0.926017
+loss: 0.009971  [ 8960/17030]
+Valid! hamming_dts=0.011097, loss=0.000162, acc=0.927524
+loss: 0.005972  [10240/17030]
+Valid! hamming_dts=0.010841, loss=0.000160, acc=0.928483
+loss: 0.006807  [11520/17030]
+Valid! hamming_dts=0.011080, loss=0.000161, acc=0.926154
+loss: 0.008973  [12800/17030]
+Valid! hamming_dts=0.010841, loss=0.000160, acc=0.928346
+loss: 0.010435  [14080/17030]
+Valid! hamming_dts=0.010755, loss=0.000158, acc=0.929442
+loss: 0.008237  [15360/17030]
+Valid! hamming_dts=0.010909, loss=0.000161, acc=0.927661
+loss: 0.007832  [16640/17030]
+Valid! hamming_dts=0.010875, loss=0.000158, acc=0.928346
+Epoch 6
+-------------------------------
+loss: 0.038361  [    0/17030]
+Valid! hamming_dts=0.011269, loss=0.000165, acc=0.925743
+loss: 0.008888  [ 1280/17030]
+Valid! hamming_dts=0.011029, loss=0.000159, acc=0.927387
+loss: 0.003737  [ 2560/17030]
+Valid! hamming_dts=0.010858, loss=0.000158, acc=0.928757
+loss: 0.006802  [ 3840/17030]
+Valid! hamming_dts=0.011132, loss=0.000156, acc=0.926839
+loss: 0.013516  [ 5120/17030]
+Valid! hamming_dts=0.010960, loss=0.000157, acc=0.927798
+loss: 0.005663  [ 6400/17030]
+Valid! hamming_dts=0.011012, loss=0.000160, acc=0.927387
+loss: 0.008027  [ 7680/17030]
+Valid! hamming_dts=0.010960, loss=0.000156, acc=0.927798
+loss: 0.005893  [ 8960/17030]
+Valid! hamming_dts=0.011080, loss=0.000158, acc=0.926565
+loss: 0.008629  [10240/17030]
+Valid! hamming_dts=0.010909, loss=0.000166, acc=0.927935
+loss: 0.005939  [11520/17030]
+Valid! hamming_dts=0.011200, loss=0.000165, acc=0.926565
+loss: 0.008266  [12800/17030]
+Valid! hamming_dts=0.011063, loss=0.000162, acc=0.926839
+loss: 0.011536  [14080/17030]
+Valid! hamming_dts=0.011012, loss=0.000158, acc=0.927524
+loss: 0.003392  [15360/17030]
+Valid! hamming_dts=0.010978, loss=0.000157, acc=0.926976
+loss: 0.008580  [16640/17030]
+Valid! hamming_dts=0.010978, loss=0.000158, acc=0.926839
+Epoch 7
+-------------------------------
+loss: 0.034677  [    0/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928209
+loss: 0.006009  [ 1280/17030]
+Valid! hamming_dts=0.011029, loss=0.000158, acc=0.927387
+loss: 0.007581  [ 2560/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927661
+loss: 0.008211  [ 3840/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928620
+loss: 0.014122  [ 5120/17030]
+Valid! hamming_dts=0.010755, loss=0.000163, acc=0.928894
+loss: 0.008713  [ 6400/17030]
+Valid! hamming_dts=0.011046, loss=0.000158, acc=0.926976
+loss: 0.004142  [ 7680/17030]
+Valid! hamming_dts=0.010841, loss=0.000158, acc=0.928483
+loss: 0.007178  [ 8960/17030]
+Valid! hamming_dts=0.011115, loss=0.000157, acc=0.926702
+loss: 0.008768  [10240/17030]
+Valid! hamming_dts=0.010721, loss=0.000158, acc=0.929305
+loss: 0.008796  [11520/17030]
+Valid! hamming_dts=0.011029, loss=0.000161, acc=0.927113
+loss: 0.006096  [12800/17030]
+Valid! hamming_dts=0.011508, loss=0.000165, acc=0.923962
+loss: 0.003151  [14080/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.927935
+loss: 0.010163  [15360/17030]
+Valid! hamming_dts=0.010858, loss=0.000157, acc=0.928483
+loss: 0.009179  [16640/17030]
+Valid! hamming_dts=0.010755, loss=0.000161, acc=0.929305
+Epoch 8
+-------------------------------
+loss: 0.044571  [    0/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.928757
+loss: 0.009149  [ 1280/17030]
+Valid! hamming_dts=0.010926, loss=0.000158, acc=0.927935
+loss: 0.008324  [ 2560/17030]
+Valid! hamming_dts=0.011046, loss=0.000163, acc=0.927250
+loss: 0.009920  [ 3840/17030]
+Valid! hamming_dts=0.010669, loss=0.000166, acc=0.929853
+loss: 0.011729  [ 5120/17030]
+Valid! hamming_dts=0.010738, loss=0.000161, acc=0.929031
+loss: 0.009808  [ 6400/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.928757
+loss: 0.005808  [ 7680/17030]
+Valid! hamming_dts=0.010823, loss=0.000158, acc=0.929031
+loss: 0.010489  [ 8960/17030]
+Valid! hamming_dts=0.010892, loss=0.000157, acc=0.928209
+loss: 0.008214  [10240/17030]
+Valid! hamming_dts=0.011046, loss=0.000156, acc=0.926702
+loss: 0.004566  [11520/17030]
+Valid! hamming_dts=0.011063, loss=0.000158, acc=0.926702
+loss: 0.006876  [12800/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929168
+loss: 0.006670  [14080/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929442
+loss: 0.005138  [15360/17030]
+Valid! hamming_dts=0.010943, loss=0.000156, acc=0.927113
+loss: 0.011675  [16640/17030]
+Valid! hamming_dts=0.011046, loss=0.000156, acc=0.926839
+Epoch 9
+-------------------------------
+loss: 0.052885  [    0/17030]
+Valid! hamming_dts=0.010806, loss=0.000158, acc=0.929031
+loss: 0.003116  [ 1280/17030]
+Valid! hamming_dts=0.010841, loss=0.000159, acc=0.928346
+loss: 0.009895  [ 2560/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.928072
+loss: 0.004859  [ 3840/17030]
+Valid! hamming_dts=0.010755, loss=0.000157, acc=0.929716
+loss: 0.008275  [ 5120/17030]
+Valid! hamming_dts=0.010978, loss=0.000157, acc=0.927524
+loss: 0.011057  [ 6400/17030]
+Valid! hamming_dts=0.011012, loss=0.000160, acc=0.926976
+loss: 0.009605  [ 7680/17030]
+Valid! hamming_dts=0.010943, loss=0.000157, acc=0.927661
+loss: 0.008339  [ 8960/17030]
+Valid! hamming_dts=0.010909, loss=0.000159, acc=0.928209
+loss: 0.004806  [10240/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929031
+loss: 0.008209  [11520/17030]
+Valid! hamming_dts=0.010789, loss=0.000163, acc=0.928620
+loss: 0.007126  [12800/17030]
+Valid! hamming_dts=0.011029, loss=0.000160, acc=0.926976
+loss: 0.010839  [14080/17030]
+Valid! hamming_dts=0.010841, loss=0.000158, acc=0.928483
+loss: 0.006563  [15360/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929168
+loss: 0.005042  [16640/17030]
+Valid! hamming_dts=0.010892, loss=0.000159, acc=0.927935
+Epoch 10
+-------------------------------
+loss: 0.053607  [    0/17030]
+Valid! hamming_dts=0.010943, loss=0.000156, acc=0.927524
+loss: 0.016638  [ 1280/17030]
+Valid! hamming_dts=0.010858, loss=0.000161, acc=0.928346
+loss: 0.009524  [ 2560/17030]
+Valid! hamming_dts=0.011200, loss=0.000158, acc=0.925880
+loss: 0.007864  [ 3840/17030]
+Valid! hamming_dts=0.010926, loss=0.000157, acc=0.927661
+loss: 0.004981  [ 5120/17030]
+Valid! hamming_dts=0.011406, loss=0.000159, acc=0.924647
+loss: 0.010923  [ 6400/17030]
+Valid! hamming_dts=0.010858, loss=0.000157, acc=0.928072
+loss: 0.004592  [ 7680/17030]
+Valid! hamming_dts=0.011115, loss=0.000163, acc=0.926839
+loss: 0.006927  [ 8960/17030]
+Valid! hamming_dts=0.010841, loss=0.000158, acc=0.928483
+loss: 0.010750  [10240/17030]
+Valid! hamming_dts=0.011063, loss=0.000156, acc=0.926839
+loss: 0.008937  [11520/17030]
+Valid! hamming_dts=0.010841, loss=0.000169, acc=0.928483
+loss: 0.011829  [12800/17030]
+Valid! hamming_dts=0.011012, loss=0.000157, acc=0.927387
+loss: 0.007386  [14080/17030]
+Valid! hamming_dts=0.010584, loss=0.000156, acc=0.929990
+loss: 0.008647  [15360/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.929442
+loss: 0.007312  [16640/17030]
+Valid! hamming_dts=0.010567, loss=0.000157, acc=0.929990
+Epoch 11
+-------------------------------
+loss: 0.040572  [    0/17030]
+Valid! hamming_dts=0.010892, loss=0.000159, acc=0.928209
+loss: 0.008633  [ 1280/17030]
+Valid! hamming_dts=0.010978, loss=0.000157, acc=0.927387
+loss: 0.004666  [ 2560/17030]
+Valid! hamming_dts=0.010875, loss=0.000161, acc=0.927798
+loss: 0.005612  [ 3840/17030]
+Valid! hamming_dts=0.011029, loss=0.000159, acc=0.926976
+loss: 0.008264  [ 5120/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927798
+loss: 0.008692  [ 6400/17030]
+Valid! hamming_dts=0.011012, loss=0.000157, acc=0.926839
+loss: 0.006680  [ 7680/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928209
+loss: 0.005020  [ 8960/17030]
+Valid! hamming_dts=0.010995, loss=0.000155, acc=0.927661
+loss: 0.011786  [10240/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.929031
+loss: 0.007103  [11520/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928346
+loss: 0.008798  [12800/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.929031
+loss: 0.010736  [14080/17030]
+Valid! hamming_dts=0.010755, loss=0.000159, acc=0.929716
+loss: 0.004129  [15360/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.930127
+loss: 0.006703  [16640/17030]
+Valid! hamming_dts=0.010926, loss=0.000159, acc=0.927524
+Epoch 12
+-------------------------------
+loss: 0.044102  [    0/17030]
+Valid! hamming_dts=0.011012, loss=0.000158, acc=0.926839
+loss: 0.004326  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.927661
+loss: 0.009021  [ 2560/17030]
+Valid! hamming_dts=0.011097, loss=0.000156, acc=0.926839
+loss: 0.008386  [ 3840/17030]
+Valid! hamming_dts=0.010909, loss=0.000158, acc=0.928072
+loss: 0.010031  [ 5120/17030]
+Valid! hamming_dts=0.010789, loss=0.000158, acc=0.928483
+loss: 0.006511  [ 6400/17030]
+Valid! hamming_dts=0.010635, loss=0.000156, acc=0.929990
+loss: 0.007952  [ 7680/17030]
+Valid! hamming_dts=0.011149, loss=0.000167, acc=0.925743
+loss: 0.012788  [ 8960/17030]
+Valid! hamming_dts=0.011234, loss=0.000158, acc=0.926017
+loss: 0.005494  [10240/17030]
+Valid! hamming_dts=0.011252, loss=0.000159, acc=0.926291
+loss: 0.007558  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000162, acc=0.929442
+loss: 0.008106  [12800/17030]
+Valid! hamming_dts=0.010960, loss=0.000159, acc=0.927661
+loss: 0.011734  [14080/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928346
+loss: 0.007193  [15360/17030]
+Valid! hamming_dts=0.010704, loss=0.000167, acc=0.929168
+loss: 0.013228  [16640/17030]
+Valid! hamming_dts=0.010978, loss=0.000156, acc=0.927661
+Epoch 13
+-------------------------------
+loss: 0.039766  [    0/17030]
+Valid! hamming_dts=0.010978, loss=0.000155, acc=0.927661
+loss: 0.006562  [ 1280/17030]
+Valid! hamming_dts=0.011080, loss=0.000159, acc=0.927250
+loss: 0.011512  [ 2560/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928757
+loss: 0.007436  [ 3840/17030]
+Valid! hamming_dts=0.011012, loss=0.000157, acc=0.927250
+loss: 0.006435  [ 5120/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.927524
+loss: 0.007466  [ 6400/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928346
+loss: 0.010676  [ 7680/17030]
+Valid! hamming_dts=0.010823, loss=0.000160, acc=0.928346
+loss: 0.006855  [ 8960/17030]
+Valid! hamming_dts=0.011080, loss=0.000159, acc=0.926839
+loss: 0.005124  [10240/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.928072
+loss: 0.008282  [11520/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.929442
+loss: 0.009407  [12800/17030]
+Valid! hamming_dts=0.010789, loss=0.000157, acc=0.928483
+loss: 0.007591  [14080/17030]
+Valid! hamming_dts=0.010875, loss=0.000160, acc=0.928209
+loss: 0.009310  [15360/17030]
+Valid! hamming_dts=0.010738, loss=0.000167, acc=0.929168
+loss: 0.008742  [16640/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929168
+Epoch 14
+-------------------------------
+loss: 0.037295  [    0/17030]
+Valid! hamming_dts=0.010875, loss=0.000158, acc=0.928072
+loss: 0.010124  [ 1280/17030]
+Valid! hamming_dts=0.010960, loss=0.000161, acc=0.927250
+loss: 0.012143  [ 2560/17030]
+Valid! hamming_dts=0.010875, loss=0.000160, acc=0.927935
+loss: 0.014484  [ 3840/17030]
+Valid! hamming_dts=0.010960, loss=0.000159, acc=0.927387
+loss: 0.009950  [ 5120/17030]
+Valid! hamming_dts=0.010755, loss=0.000157, acc=0.928894
+loss: 0.004786  [ 6400/17030]
+Valid! hamming_dts=0.010875, loss=0.000158, acc=0.927935
+loss: 0.013383  [ 7680/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926976
+loss: 0.003928  [ 8960/17030]
+Valid! hamming_dts=0.010875, loss=0.000158, acc=0.929031
+loss: 0.007405  [10240/17030]
+Valid! hamming_dts=0.010892, loss=0.000158, acc=0.927935
+loss: 0.003928  [11520/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.930127
+loss: 0.013794  [12800/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928894
+loss: 0.012018  [14080/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.927935
+loss: 0.008236  [15360/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.927524
+loss: 0.012512  [16640/17030]
+Valid! hamming_dts=0.011012, loss=0.000164, acc=0.926976
+Epoch 15
+-------------------------------
+loss: 0.032475  [    0/17030]
+Valid! hamming_dts=0.010978, loss=0.000158, acc=0.927113
+loss: 0.007643  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000158, acc=0.928757
+loss: 0.005581  [ 2560/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928346
+loss: 0.008165  [ 3840/17030]
+Valid! hamming_dts=0.010806, loss=0.000158, acc=0.928894
+loss: 0.004291  [ 5120/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928483
+loss: 0.008924  [ 6400/17030]
+Valid! hamming_dts=0.010721, loss=0.000157, acc=0.929305
+loss: 0.004579  [ 7680/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.928757
+loss: 0.012640  [ 8960/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928483
+loss: 0.015306  [10240/17030]
+Valid! hamming_dts=0.010858, loss=0.000159, acc=0.927935
+loss: 0.005912  [11520/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928620
+loss: 0.009368  [12800/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928757
+loss: 0.006332  [14080/17030]
+Valid! hamming_dts=0.010926, loss=0.000157, acc=0.928209
+loss: 0.007326  [15360/17030]
+Valid! hamming_dts=0.010841, loss=0.000164, acc=0.928072
+loss: 0.011220  [16640/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.928346
+Epoch 16
+-------------------------------
+loss: 0.043509  [    0/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928346
+loss: 0.006663  [ 1280/17030]
+Valid! hamming_dts=0.010892, loss=0.000162, acc=0.927798
+loss: 0.011350  [ 2560/17030]
+Valid! hamming_dts=0.010875, loss=0.000163, acc=0.928209
+loss: 0.008458  [ 3840/17030]
+Valid! hamming_dts=0.011029, loss=0.000158, acc=0.928072
+loss: 0.005661  [ 5120/17030]
+Valid! hamming_dts=0.010738, loss=0.000158, acc=0.929168
+loss: 0.010402  [ 6400/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.927661
+loss: 0.010914  [ 7680/17030]
+Valid! hamming_dts=0.010686, loss=0.000165, acc=0.929716
+loss: 0.006097  [ 8960/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.927798
+loss: 0.005410  [10240/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.927798
+loss: 0.002581  [11520/17030]
+Valid! hamming_dts=0.011183, loss=0.000158, acc=0.925880
+loss: 0.003935  [12800/17030]
+Valid! hamming_dts=0.011012, loss=0.000156, acc=0.927387
+loss: 0.009553  [14080/17030]
+Valid! hamming_dts=0.010721, loss=0.000158, acc=0.929031
+loss: 0.007560  [15360/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926839
+loss: 0.006639  [16640/17030]
+Valid! hamming_dts=0.010567, loss=0.000155, acc=0.930264
+Epoch 17
+-------------------------------
+loss: 0.040065  [    0/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929716
+loss: 0.007985  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.928209
+loss: 0.004568  [ 2560/17030]
+Valid! hamming_dts=0.010652, loss=0.000159, acc=0.929990
+loss: 0.004567  [ 3840/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929442
+loss: 0.008224  [ 5120/17030]
+Valid! hamming_dts=0.010498, loss=0.000165, acc=0.930812
+loss: 0.006872  [ 6400/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.929305
+loss: 0.007694  [ 7680/17030]
+Valid! hamming_dts=0.010686, loss=0.000163, acc=0.929579
+loss: 0.005286  [ 8960/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.929168
+loss: 0.008258  [10240/17030]
+Valid! hamming_dts=0.010652, loss=0.000156, acc=0.929716
+loss: 0.006164  [11520/17030]
+Valid! hamming_dts=0.010806, loss=0.000155, acc=0.928620
+loss: 0.012613  [12800/17030]
+Valid! hamming_dts=0.010772, loss=0.000156, acc=0.929168
+loss: 0.010247  [14080/17030]
+Valid! hamming_dts=0.010995, loss=0.000159, acc=0.926976
+loss: 0.003637  [15360/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927798
+loss: 0.006179  [16640/17030]
+Valid! hamming_dts=0.010909, loss=0.000155, acc=0.927387
+Epoch 18
+-------------------------------
+loss: 0.033395  [    0/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928757
+loss: 0.012146  [ 1280/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927661
+loss: 0.004884  [ 2560/17030]
+Valid! hamming_dts=0.011303, loss=0.000160, acc=0.924921
+loss: 0.011837  [ 3840/17030]
+Valid! hamming_dts=0.010652, loss=0.000158, acc=0.929716
+loss: 0.007812  [ 5120/17030]
+Valid! hamming_dts=0.011029, loss=0.000156, acc=0.927113
+loss: 0.009882  [ 6400/17030]
+Valid! hamming_dts=0.010960, loss=0.000157, acc=0.927387
+loss: 0.012451  [ 7680/17030]
+Valid! hamming_dts=0.010858, loss=0.000157, acc=0.928483
+loss: 0.013237  [ 8960/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.927935
+loss: 0.005020  [10240/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928483
+loss: 0.006746  [11520/17030]
+Valid! hamming_dts=0.010481, loss=0.000156, acc=0.930949
+loss: 0.010548  [12800/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928757
+loss: 0.009969  [14080/17030]
+Valid! hamming_dts=0.010738, loss=0.000156, acc=0.929031
+loss: 0.006505  [15360/17030]
+Valid! hamming_dts=0.010943, loss=0.000155, acc=0.927661
+loss: 0.017237  [16640/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928757
+Epoch 19
+-------------------------------
+loss: 0.034135  [    0/17030]
+Valid! hamming_dts=0.010892, loss=0.000162, acc=0.927935
+loss: 0.011886  [ 1280/17030]
+Valid! hamming_dts=0.010995, loss=0.000157, acc=0.927113
+loss: 0.011844  [ 2560/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.929442
+loss: 0.005221  [ 3840/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929168
+loss: 0.004546  [ 5120/17030]
+Valid! hamming_dts=0.010738, loss=0.000157, acc=0.929305
+loss: 0.012472  [ 6400/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.929990
+loss: 0.005438  [ 7680/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928483
+loss: 0.011336  [ 8960/17030]
+Valid! hamming_dts=0.010686, loss=0.000155, acc=0.929579
+loss: 0.008298  [10240/17030]
+Valid! hamming_dts=0.010943, loss=0.000156, acc=0.927798
+loss: 0.011478  [11520/17030]
+Valid! hamming_dts=0.010755, loss=0.000154, acc=0.928894
+loss: 0.011840  [12800/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.928072
+loss: 0.010545  [14080/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.928072
+loss: 0.003721  [15360/17030]
+Valid! hamming_dts=0.010618, loss=0.000157, acc=0.930264
+loss: 0.010041  [16640/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.929990
+Epoch 20
+-------------------------------
+loss: 0.043254  [    0/17030]
+Valid! hamming_dts=0.010892, loss=0.000160, acc=0.928209
+loss: 0.005615  [ 1280/17030]
+Valid! hamming_dts=0.011097, loss=0.000157, acc=0.926976
+loss: 0.010292  [ 2560/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929168
+loss: 0.005843  [ 3840/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.927935
+loss: 0.011992  [ 5120/17030]
+Valid! hamming_dts=0.010567, loss=0.000162, acc=0.930264
+loss: 0.006946  [ 6400/17030]
+Valid! hamming_dts=0.011166, loss=0.000161, acc=0.926428
+loss: 0.010469  [ 7680/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.927661
+loss: 0.007013  [ 8960/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928894
+loss: 0.008702  [10240/17030]
+Valid! hamming_dts=0.011029, loss=0.000161, acc=0.927113
+loss: 0.007692  [11520/17030]
+Valid! hamming_dts=0.010875, loss=0.000159, acc=0.927524
+loss: 0.007008  [12800/17030]
+Valid! hamming_dts=0.011132, loss=0.000159, acc=0.926017
+loss: 0.005972  [14080/17030]
+Valid! hamming_dts=0.010584, loss=0.000156, acc=0.930538
+loss: 0.005503  [15360/17030]
+Valid! hamming_dts=0.010789, loss=0.000159, acc=0.928757
+loss: 0.011083  [16640/17030]
+Valid! hamming_dts=0.010875, loss=0.000155, acc=0.928209
+Epoch 21
+-------------------------------
+loss: 0.033341  [    0/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.927661
+loss: 0.006090  [ 1280/17030]
+Valid! hamming_dts=0.010841, loss=0.000154, acc=0.928757
+loss: 0.006726  [ 2560/17030]
+Valid! hamming_dts=0.010738, loss=0.000156, acc=0.928757
+loss: 0.012252  [ 3840/17030]
+Valid! hamming_dts=0.010943, loss=0.000161, acc=0.927798
+loss: 0.003278  [ 5120/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.929305
+loss: 0.002227  [ 6400/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.930264
+loss: 0.003424  [ 7680/17030]
+Valid! hamming_dts=0.010704, loss=0.000156, acc=0.929031
+loss: 0.011859  [ 8960/17030]
+Valid! hamming_dts=0.011046, loss=0.000157, acc=0.926976
+loss: 0.011684  [10240/17030]
+Valid! hamming_dts=0.010567, loss=0.000156, acc=0.930264
+loss: 0.008054  [11520/17030]
+Valid! hamming_dts=0.011046, loss=0.000165, acc=0.927113
+loss: 0.005251  [12800/17030]
+Valid! hamming_dts=0.010755, loss=0.000158, acc=0.929031
+loss: 0.005088  [14080/17030]
+Valid! hamming_dts=0.010772, loss=0.000156, acc=0.928894
+loss: 0.004480  [15360/17030]
+Valid! hamming_dts=0.010738, loss=0.000156, acc=0.928757
+loss: 0.004164  [16640/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926839
+Epoch 22
+-------------------------------
+loss: 0.032271  [    0/17030]
+Valid! hamming_dts=0.011029, loss=0.000160, acc=0.926976
+loss: 0.004428  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000164, acc=0.928483
+loss: 0.010295  [ 2560/17030]
+Valid! hamming_dts=0.010704, loss=0.000156, acc=0.929853
+loss: 0.008372  [ 3840/17030]
+Valid! hamming_dts=0.010601, loss=0.000163, acc=0.930264
+loss: 0.006134  [ 5120/17030]
+Valid! hamming_dts=0.010498, loss=0.000157, acc=0.930949
+loss: 0.006006  [ 6400/17030]
+Valid! hamming_dts=0.010669, loss=0.000158, acc=0.929442
+loss: 0.007168  [ 7680/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928620
+loss: 0.003497  [ 8960/17030]
+Valid! hamming_dts=0.010601, loss=0.000154, acc=0.929990
+loss: 0.006514  [10240/17030]
+Valid! hamming_dts=0.010532, loss=0.000157, acc=0.930675
+loss: 0.010056  [11520/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.929031
+loss: 0.014504  [12800/17030]
+Valid! hamming_dts=0.011080, loss=0.000157, acc=0.926428
+loss: 0.007006  [14080/17030]
+Valid! hamming_dts=0.010858, loss=0.000157, acc=0.928072
+loss: 0.011236  [15360/17030]
+Valid! hamming_dts=0.011097, loss=0.000157, acc=0.926702
+loss: 0.008443  [16640/17030]
+Valid! hamming_dts=0.010858, loss=0.000160, acc=0.928346
+Epoch 23
+-------------------------------
+loss: 0.039656  [    0/17030]
+Valid! hamming_dts=0.011594, loss=0.000172, acc=0.922729
+loss: 0.004061  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.928346
+loss: 0.012929  [ 2560/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928483
+loss: 0.004862  [ 3840/17030]
+Valid! hamming_dts=0.010892, loss=0.000155, acc=0.928620
+loss: 0.009847  [ 5120/17030]
+Valid! hamming_dts=0.010755, loss=0.000154, acc=0.928894
+loss: 0.008448  [ 6400/17030]
+Valid! hamming_dts=0.010686, loss=0.000157, acc=0.929579
+loss: 0.005445  [ 7680/17030]
+Valid! hamming_dts=0.011046, loss=0.000159, acc=0.926976
+loss: 0.006902  [ 8960/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.928072
+loss: 0.009325  [10240/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.928757
+loss: 0.004640  [11520/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.927935
+loss: 0.007544  [12800/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.927798
+loss: 0.012813  [14080/17030]
+Valid! hamming_dts=0.011594, loss=0.000164, acc=0.923003
+loss: 0.011987  [15360/17030]
+Valid! hamming_dts=0.010943, loss=0.000158, acc=0.927661
+loss: 0.008867  [16640/17030]
+Valid! hamming_dts=0.010721, loss=0.000159, acc=0.929305
+Epoch 24
+-------------------------------
+loss: 0.034696  [    0/17030]
+Valid! hamming_dts=0.010823, loss=0.000156, acc=0.927935
+loss: 0.011583  [ 1280/17030]
+Valid! hamming_dts=0.010960, loss=0.000158, acc=0.928072
+loss: 0.006067  [ 2560/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.928072
+loss: 0.004518  [ 3840/17030]
+Valid! hamming_dts=0.010978, loss=0.000158, acc=0.927661
+loss: 0.007101  [ 5120/17030]
+Valid! hamming_dts=0.011046, loss=0.000161, acc=0.927387
+loss: 0.008469  [ 6400/17030]
+Valid! hamming_dts=0.010978, loss=0.000160, acc=0.926839
+loss: 0.004772  [ 7680/17030]
+Valid! hamming_dts=0.011149, loss=0.000158, acc=0.926291
+loss: 0.010469  [ 8960/17030]
+Valid! hamming_dts=0.010549, loss=0.000158, acc=0.930264
+loss: 0.007430  [10240/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.929168
+loss: 0.010615  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000156, acc=0.929305
+loss: 0.005834  [12800/17030]
+Valid! hamming_dts=0.011166, loss=0.000160, acc=0.926154
+loss: 0.011434  [14080/17030]
+Valid! hamming_dts=0.010943, loss=0.000155, acc=0.927798
+loss: 0.005920  [15360/17030]
+Valid! hamming_dts=0.010686, loss=0.000155, acc=0.929305
+loss: 0.011443  [16640/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.929031
+Epoch 25
+-------------------------------
+loss: 0.036477  [    0/17030]
+Valid! hamming_dts=0.010909, loss=0.000160, acc=0.927935
+loss: 0.005026  [ 1280/17030]
+Valid! hamming_dts=0.010892, loss=0.000160, acc=0.927935
+loss: 0.011757  [ 2560/17030]
+Valid! hamming_dts=0.010772, loss=0.000156, acc=0.929168
+loss: 0.004417  [ 3840/17030]
+Valid! hamming_dts=0.010909, loss=0.000159, acc=0.927524
+loss: 0.007614  [ 5120/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926839
+loss: 0.007304  [ 6400/17030]
+Valid! hamming_dts=0.010635, loss=0.000156, acc=0.929853
+loss: 0.011677  [ 7680/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.928894
+loss: 0.009029  [ 8960/17030]
+Valid! hamming_dts=0.010995, loss=0.000157, acc=0.927250
+loss: 0.007562  [10240/17030]
+Valid! hamming_dts=0.010875, loss=0.000161, acc=0.928346
+loss: 0.006843  [11520/17030]
+Valid! hamming_dts=0.011080, loss=0.000159, acc=0.926428
+loss: 0.010844  [12800/17030]
+Valid! hamming_dts=0.010858, loss=0.000155, acc=0.928209
+loss: 0.011622  [14080/17030]
+Valid! hamming_dts=0.010858, loss=0.000169, acc=0.928209
+loss: 0.010643  [15360/17030]
+Valid! hamming_dts=0.010464, loss=0.000156, acc=0.931498
+loss: 0.006713  [16640/17030]
+Valid! hamming_dts=0.010601, loss=0.000154, acc=0.930401
+Epoch 26
+-------------------------------
+loss: 0.029387  [    0/17030]
+Valid! hamming_dts=0.010960, loss=0.000157, acc=0.928209
+loss: 0.008732  [ 1280/17030]
+Valid! hamming_dts=0.011115, loss=0.000158, acc=0.926428
+loss: 0.006151  [ 2560/17030]
+Valid! hamming_dts=0.011046, loss=0.000155, acc=0.927250
+loss: 0.006952  [ 3840/17030]
+Valid! hamming_dts=0.010892, loss=0.000157, acc=0.928209
+loss: 0.003852  [ 5120/17030]
+Valid! hamming_dts=0.010772, loss=0.000155, acc=0.929168
+loss: 0.008595  [ 6400/17030]
+Valid! hamming_dts=0.010909, loss=0.000154, acc=0.927661
+loss: 0.005774  [ 7680/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.927798
+loss: 0.010394  [ 8960/17030]
+Valid! hamming_dts=0.010806, loss=0.000159, acc=0.928346
+loss: 0.006008  [10240/17030]
+Valid! hamming_dts=0.010704, loss=0.000155, acc=0.929442
+loss: 0.007574  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000156, acc=0.929305
+loss: 0.009892  [12800/17030]
+Valid! hamming_dts=0.010909, loss=0.000154, acc=0.927935
+loss: 0.009376  [14080/17030]
+Valid! hamming_dts=0.010412, loss=0.000156, acc=0.931360
+loss: 0.007469  [15360/17030]
+Valid! hamming_dts=0.011029, loss=0.000158, acc=0.926565
+loss: 0.007068  [16640/17030]
+Valid! hamming_dts=0.010601, loss=0.000159, acc=0.930127
+Epoch 27
+-------------------------------
+loss: 0.042478  [    0/17030]
+Valid! hamming_dts=0.010909, loss=0.000160, acc=0.927661
+loss: 0.006743  [ 1280/17030]
+Valid! hamming_dts=0.010789, loss=0.000160, acc=0.929031
+loss: 0.007035  [ 2560/17030]
+Valid! hamming_dts=0.010430, loss=0.000156, acc=0.930949
+loss: 0.010405  [ 3840/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928620
+loss: 0.003711  [ 5120/17030]
+Valid! hamming_dts=0.010686, loss=0.000156, acc=0.929853
+loss: 0.009022  [ 6400/17030]
+Valid! hamming_dts=0.010909, loss=0.000157, acc=0.928072
+loss: 0.007474  [ 7680/17030]
+Valid! hamming_dts=0.011012, loss=0.000158, acc=0.926839
+loss: 0.005086  [ 8960/17030]
+Valid! hamming_dts=0.010686, loss=0.000156, acc=0.929853
+loss: 0.008698  [10240/17030]
+Valid! hamming_dts=0.011286, loss=0.000160, acc=0.925469
+loss: 0.009375  [11520/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928620
+loss: 0.007503  [12800/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928346
+loss: 0.009462  [14080/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928620
+loss: 0.005849  [15360/17030]
+Valid! hamming_dts=0.010772, loss=0.000158, acc=0.929168
+loss: 0.010652  [16640/17030]
+Valid! hamming_dts=0.011080, loss=0.000161, acc=0.926428
+Epoch 28
+-------------------------------
+loss: 0.052662  [    0/17030]
+Valid! hamming_dts=0.010960, loss=0.000157, acc=0.927113
+loss: 0.006730  [ 1280/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928757
+loss: 0.004646  [ 2560/17030]
+Valid! hamming_dts=0.010978, loss=0.000155, acc=0.927798
+loss: 0.008332  [ 3840/17030]
+Valid! hamming_dts=0.010875, loss=0.000160, acc=0.928209
+loss: 0.009813  [ 5120/17030]
+Valid! hamming_dts=0.011217, loss=0.000158, acc=0.925606
+loss: 0.009993  [ 6400/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.930127
+loss: 0.005042  [ 7680/17030]
+Valid! hamming_dts=0.010789, loss=0.000154, acc=0.928894
+loss: 0.016333  [ 8960/17030]
+Valid! hamming_dts=0.010806, loss=0.000154, acc=0.928483
+loss: 0.007877  [10240/17030]
+Valid! hamming_dts=0.010806, loss=0.000155, acc=0.929031
+loss: 0.005937  [11520/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.928483
+loss: 0.012602  [12800/17030]
+Valid! hamming_dts=0.010584, loss=0.000156, acc=0.930538
+loss: 0.008545  [14080/17030]
+Valid! hamming_dts=0.010618, loss=0.000154, acc=0.929990
+loss: 0.003993  [15360/17030]
+Valid! hamming_dts=0.010584, loss=0.000155, acc=0.930264
+loss: 0.006987  [16640/17030]
+Valid! hamming_dts=0.010721, loss=0.000161, acc=0.928757
+Epoch 29
+-------------------------------
+loss: 0.054182  [    0/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928757
+loss: 0.007159  [ 1280/17030]
+Valid! hamming_dts=0.010721, loss=0.000159, acc=0.929853
+loss: 0.006622  [ 2560/17030]
+Valid! hamming_dts=0.010772, loss=0.000160, acc=0.929168
+loss: 0.008116  [ 3840/17030]
+Valid! hamming_dts=0.011234, loss=0.000160, acc=0.926291
+loss: 0.012549  [ 5120/17030]
+Valid! hamming_dts=0.010875, loss=0.000155, acc=0.927798
+loss: 0.007651  [ 6400/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929853
+loss: 0.016064  [ 7680/17030]
+Valid! hamming_dts=0.010464, loss=0.000154, acc=0.930949
+loss: 0.013134  [ 8960/17030]
+Valid! hamming_dts=0.010310, loss=0.000154, acc=0.932183
+loss: 0.008021  [10240/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.929168
+loss: 0.003621  [11520/17030]
+Valid! hamming_dts=0.010721, loss=0.000154, acc=0.929168
+loss: 0.004884  [12800/17030]
+Valid! hamming_dts=0.011029, loss=0.000156, acc=0.926565
+loss: 0.007387  [14080/17030]
+Valid! hamming_dts=0.010755, loss=0.000157, acc=0.929442
+loss: 0.008966  [15360/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928620
+loss: 0.005259  [16640/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928346
+Epoch 30
+-------------------------------
+loss: 0.029395  [    0/17030]
+Valid! hamming_dts=0.011080, loss=0.000156, acc=0.926428
+loss: 0.007101  [ 1280/17030]
+Valid! hamming_dts=0.010841, loss=0.000161, acc=0.928483
+loss: 0.010408  [ 2560/17030]
+Valid! hamming_dts=0.010978, loss=0.000160, acc=0.927524
+loss: 0.012142  [ 3840/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928346
+loss: 0.022263  [ 5120/17030]
+Valid! hamming_dts=0.010943, loss=0.000170, acc=0.927661
+loss: 0.009510  [ 6400/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929853
+loss: 0.005858  [ 7680/17030]
+Valid! hamming_dts=0.010755, loss=0.000153, acc=0.929031
+loss: 0.008546  [ 8960/17030]
+Valid! hamming_dts=0.010960, loss=0.000154, acc=0.927250
+loss: 0.013459  [10240/17030]
+Valid! hamming_dts=0.010498, loss=0.000155, acc=0.931086
+loss: 0.003681  [11520/17030]
+Valid! hamming_dts=0.010721, loss=0.000155, acc=0.928894
+loss: 0.007233  [12800/17030]
+Valid! hamming_dts=0.011080, loss=0.000155, acc=0.926565
+loss: 0.009704  [14080/17030]
+Valid! hamming_dts=0.010738, loss=0.000154, acc=0.929031
+loss: 0.005716  [15360/17030]
+Valid! hamming_dts=0.010960, loss=0.000163, acc=0.927250
+loss: 0.005527  [16640/17030]
+Valid! hamming_dts=0.010755, loss=0.000161, acc=0.929168
+Epoch 31
+-------------------------------
+loss: 0.043418  [    0/17030]
+Valid! hamming_dts=0.010772, loss=0.000154, acc=0.928346
+loss: 0.005478  [ 1280/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.928620
+loss: 0.008403  [ 2560/17030]
+Valid! hamming_dts=0.011080, loss=0.000159, acc=0.926428
+loss: 0.012671  [ 3840/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928757
+loss: 0.009278  [ 5120/17030]
+Valid! hamming_dts=0.010669, loss=0.000156, acc=0.929853
+loss: 0.010512  [ 6400/17030]
+Valid! hamming_dts=0.010755, loss=0.000156, acc=0.929031
+loss: 0.006511  [ 7680/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.929031
+loss: 0.011760  [ 8960/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928757
+loss: 0.008704  [10240/17030]
+Valid! hamming_dts=0.010652, loss=0.000154, acc=0.929579
+loss: 0.006607  [11520/17030]
+Valid! hamming_dts=0.010669, loss=0.000153, acc=0.929853
+loss: 0.005751  [12800/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928346
+loss: 0.015452  [14080/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.928757
+loss: 0.008289  [15360/17030]
+Valid! hamming_dts=0.010567, loss=0.000156, acc=0.930538
+loss: 0.004757  [16640/17030]
+Valid! hamming_dts=0.010823, loss=0.000161, acc=0.928894
+Epoch 32
+-------------------------------
+loss: 0.043151  [    0/17030]
+Valid! hamming_dts=0.010858, loss=0.000156, acc=0.928072
+loss: 0.010634  [ 1280/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929853
+loss: 0.005995  [ 2560/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928894
+loss: 0.006142  [ 3840/17030]
+Valid! hamming_dts=0.010652, loss=0.000159, acc=0.929716
+loss: 0.007769  [ 5120/17030]
+Valid! hamming_dts=0.010909, loss=0.000154, acc=0.928483
+loss: 0.011886  [ 6400/17030]
+Valid! hamming_dts=0.010704, loss=0.000156, acc=0.929716
+loss: 0.007114  [ 7680/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.928346
+loss: 0.004305  [ 8960/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.930127
+loss: 0.009641  [10240/17030]
+Valid! hamming_dts=0.010823, loss=0.000156, acc=0.928483
+loss: 0.007720  [11520/17030]
+Valid! hamming_dts=0.011012, loss=0.000157, acc=0.926839
+loss: 0.010047  [12800/17030]
+Valid! hamming_dts=0.010635, loss=0.000160, acc=0.930264
+loss: 0.008240  [14080/17030]
+Valid! hamming_dts=0.010515, loss=0.000156, acc=0.930812
+loss: 0.006525  [15360/17030]
+Valid! hamming_dts=0.010926, loss=0.000159, acc=0.927387
+loss: 0.009133  [16640/17030]
+Valid! hamming_dts=0.010978, loss=0.000156, acc=0.927113
+Epoch 33
+-------------------------------
+loss: 0.040122  [    0/17030]
+Valid! hamming_dts=0.010875, loss=0.000155, acc=0.927798
+loss: 0.011115  [ 1280/17030]
+Valid! hamming_dts=0.011080, loss=0.000156, acc=0.926291
+loss: 0.014192  [ 2560/17030]
+Valid! hamming_dts=0.010772, loss=0.000155, acc=0.928894
+loss: 0.004118  [ 3840/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929442
+loss: 0.004987  [ 5120/17030]
+Valid! hamming_dts=0.010430, loss=0.000154, acc=0.931224
+loss: 0.007131  [ 6400/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.928483
+loss: 0.009510  [ 7680/17030]
+Valid! hamming_dts=0.010532, loss=0.000154, acc=0.930949
+loss: 0.007158  [ 8960/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928346
+loss: 0.006549  [10240/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928346
+loss: 0.009203  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000157, acc=0.929031
+loss: 0.010972  [12800/17030]
+Valid! hamming_dts=0.010806, loss=0.000158, acc=0.928757
+loss: 0.007694  [14080/17030]
+Valid! hamming_dts=0.010686, loss=0.000155, acc=0.929305
+loss: 0.005325  [15360/17030]
+Valid! hamming_dts=0.010892, loss=0.000160, acc=0.927250
+loss: 0.011062  [16640/17030]
+Valid! hamming_dts=0.010704, loss=0.000158, acc=0.929031
+Epoch 34
+-------------------------------
+loss: 0.045741  [    0/17030]
+Valid! hamming_dts=0.010875, loss=0.000154, acc=0.927935
+loss: 0.013328  [ 1280/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929579
+loss: 0.007475  [ 2560/17030]
+Valid! hamming_dts=0.011252, loss=0.000160, acc=0.926291
+loss: 0.008307  [ 3840/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929579
+loss: 0.005044  [ 5120/17030]
+Valid! hamming_dts=0.010584, loss=0.000157, acc=0.930401
+loss: 0.010697  [ 6400/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928346
+loss: 0.006634  [ 7680/17030]
+Valid! hamming_dts=0.010704, loss=0.000163, acc=0.929716
+loss: 0.009645  [ 8960/17030]
+Valid! hamming_dts=0.010755, loss=0.000154, acc=0.929716
+loss: 0.008061  [10240/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.927798
+loss: 0.009548  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000161, acc=0.929031
+loss: 0.003620  [12800/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929305
+loss: 0.008764  [14080/17030]
+Valid! hamming_dts=0.010858, loss=0.000155, acc=0.927935
+loss: 0.008620  [15360/17030]
+Valid! hamming_dts=0.010789, loss=0.000158, acc=0.928757
+loss: 0.004722  [16640/17030]
+Valid! hamming_dts=0.010738, loss=0.000157, acc=0.929305
+Epoch 35
+-------------------------------
+loss: 0.025079  [    0/17030]
+Valid! hamming_dts=0.010601, loss=0.000157, acc=0.929990
+loss: 0.007677  [ 1280/17030]
+Valid! hamming_dts=0.010738, loss=0.000159, acc=0.928620
+loss: 0.006570  [ 2560/17030]
+Valid! hamming_dts=0.010789, loss=0.000157, acc=0.928346
+loss: 0.007767  [ 3840/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927935
+loss: 0.011123  [ 5120/17030]
+Valid! hamming_dts=0.010652, loss=0.000153, acc=0.929579
+loss: 0.004297  [ 6400/17030]
+Valid! hamming_dts=0.010704, loss=0.000154, acc=0.929305
+loss: 0.011984  [ 7680/17030]
+Valid! hamming_dts=0.010721, loss=0.000154, acc=0.929168
+loss: 0.016275  [ 8960/17030]
+Valid! hamming_dts=0.010875, loss=0.000159, acc=0.928072
+loss: 0.004883  [10240/17030]
+Valid! hamming_dts=0.010447, loss=0.000156, acc=0.931634
+loss: 0.006928  [11520/17030]
+Valid! hamming_dts=0.011046, loss=0.000160, acc=0.926839
+loss: 0.006907  [12800/17030]
+Valid! hamming_dts=0.010892, loss=0.000155, acc=0.928483
+loss: 0.004262  [14080/17030]
+Valid! hamming_dts=0.010823, loss=0.000162, acc=0.928346
+loss: 0.004584  [15360/17030]
+Valid! hamming_dts=0.010738, loss=0.000158, acc=0.928894
+loss: 0.006954  [16640/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928209
+Epoch 36
+-------------------------------
+loss: 0.036416  [    0/17030]
+Valid! hamming_dts=0.010909, loss=0.000155, acc=0.927798
+loss: 0.005078  [ 1280/17030]
+Valid! hamming_dts=0.010789, loss=0.000160, acc=0.928757
+loss: 0.007857  [ 2560/17030]
+Valid! hamming_dts=0.010841, loss=0.000162, acc=0.928620
+loss: 0.009566  [ 3840/17030]
+Valid! hamming_dts=0.010601, loss=0.000156, acc=0.930127
+loss: 0.015592  [ 5120/17030]
+Valid! hamming_dts=0.010635, loss=0.000156, acc=0.929442
+loss: 0.006572  [ 6400/17030]
+Valid! hamming_dts=0.010841, loss=0.000154, acc=0.928483
+loss: 0.012316  [ 7680/17030]
+Valid! hamming_dts=0.010721, loss=0.000154, acc=0.929305
+loss: 0.005950  [ 8960/17030]
+Valid! hamming_dts=0.010909, loss=0.000154, acc=0.927798
+loss: 0.006149  [10240/17030]
+Valid! hamming_dts=0.010721, loss=0.000166, acc=0.929442
+loss: 0.003717  [11520/17030]
+Valid! hamming_dts=0.010738, loss=0.000154, acc=0.929031
+loss: 0.007618  [12800/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.929168
+loss: 0.007209  [14080/17030]
+Valid! hamming_dts=0.010430, loss=0.000158, acc=0.931634
+loss: 0.008541  [15360/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928757
+loss: 0.010192  [16640/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929853
+Epoch 37
+-------------------------------
+loss: 0.030436  [    0/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928346
+loss: 0.012843  [ 1280/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929031
+loss: 0.009433  [ 2560/17030]
+Valid! hamming_dts=0.010721, loss=0.000162, acc=0.929442
+loss: 0.010545  [ 3840/17030]
+Valid! hamming_dts=0.011012, loss=0.000156, acc=0.927250
+loss: 0.012892  [ 5120/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929031
+loss: 0.009698  [ 6400/17030]
+Valid! hamming_dts=0.010943, loss=0.000156, acc=0.927387
+loss: 0.006377  [ 7680/17030]
+Valid! hamming_dts=0.010447, loss=0.000162, acc=0.931360
+loss: 0.008787  [ 8960/17030]
+Valid! hamming_dts=0.010738, loss=0.000154, acc=0.929305
+loss: 0.005663  [10240/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.928346
+loss: 0.005490  [11520/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928894
+loss: 0.011084  [12800/17030]
+Valid! hamming_dts=0.010721, loss=0.000158, acc=0.929579
+loss: 0.014502  [14080/17030]
+Valid! hamming_dts=0.010721, loss=0.000159, acc=0.929305
+loss: 0.006301  [15360/17030]
+Valid! hamming_dts=0.011029, loss=0.000157, acc=0.926702
+loss: 0.011552  [16640/17030]
+Valid! hamming_dts=0.010875, loss=0.000153, acc=0.928072
+Epoch 38
+-------------------------------
+loss: 0.042285  [    0/17030]
+Valid! hamming_dts=0.010704, loss=0.000160, acc=0.928894
+loss: 0.009298  [ 1280/17030]
+Valid! hamming_dts=0.010755, loss=0.000160, acc=0.929579
+loss: 0.007662  [ 2560/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929853
+loss: 0.005347  [ 3840/17030]
+Valid! hamming_dts=0.010447, loss=0.000153, acc=0.930949
+loss: 0.009183  [ 5120/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.927250
+loss: 0.009064  [ 6400/17030]
+Valid! hamming_dts=0.010789, loss=0.000157, acc=0.928757
+loss: 0.008294  [ 7680/17030]
+Valid! hamming_dts=0.010772, loss=0.000157, acc=0.928894
+loss: 0.007457  [ 8960/17030]
+Valid! hamming_dts=0.010755, loss=0.000153, acc=0.928894
+loss: 0.010261  [10240/17030]
+Valid! hamming_dts=0.010995, loss=0.000163, acc=0.927661
+loss: 0.009129  [11520/17030]
+Valid! hamming_dts=0.010789, loss=0.000155, acc=0.928620
+loss: 0.009440  [12800/17030]
+Valid! hamming_dts=0.011371, loss=0.000162, acc=0.924921
+loss: 0.010005  [14080/17030]
+Valid! hamming_dts=0.010943, loss=0.000160, acc=0.927250
+loss: 0.012916  [15360/17030]
+Valid! hamming_dts=0.010892, loss=0.000158, acc=0.927935
+loss: 0.004938  [16640/17030]
+Valid! hamming_dts=0.010909, loss=0.000155, acc=0.927935
+Epoch 39
+-------------------------------
+loss: 0.040709  [    0/17030]
+Valid! hamming_dts=0.011063, loss=0.000156, acc=0.926976
+loss: 0.011685  [ 1280/17030]
+Valid! hamming_dts=0.010823, loss=0.000155, acc=0.928346
+loss: 0.006765  [ 2560/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.928072
+loss: 0.011476  [ 3840/17030]
+Valid! hamming_dts=0.011046, loss=0.000156, acc=0.926702
+loss: 0.010030  [ 5120/17030]
+Valid! hamming_dts=0.010515, loss=0.000154, acc=0.930675
+loss: 0.005804  [ 6400/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928483
+loss: 0.006282  [ 7680/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929442
+loss: 0.008216  [ 8960/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929579
+loss: 0.006603  [10240/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929853
+loss: 0.010172  [11520/17030]
+Valid! hamming_dts=0.010704, loss=0.000155, acc=0.929168
+loss: 0.016603  [12800/17030]
+Valid! hamming_dts=0.010823, loss=0.000156, acc=0.928209
+loss: 0.006431  [14080/17030]
+Valid! hamming_dts=0.010806, loss=0.000154, acc=0.928757
+loss: 0.010358  [15360/17030]
+Valid! hamming_dts=0.010704, loss=0.000155, acc=0.929716
+loss: 0.006641  [16640/17030]
+Valid! hamming_dts=0.010978, loss=0.000156, acc=0.927661
+Epoch 40
+-------------------------------
+loss: 0.041352  [    0/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.927524
+loss: 0.016604  [ 1280/17030]
+Valid! hamming_dts=0.010686, loss=0.000162, acc=0.929168
+loss: 0.005005  [ 2560/17030]
+Valid! hamming_dts=0.010721, loss=0.000157, acc=0.929442
+loss: 0.010058  [ 3840/17030]
+Valid! hamming_dts=0.010704, loss=0.000154, acc=0.929305
+loss: 0.005418  [ 5120/17030]
+Valid! hamming_dts=0.010909, loss=0.000155, acc=0.927661
+loss: 0.008521  [ 6400/17030]
+Valid! hamming_dts=0.010926, loss=0.000157, acc=0.927387
+loss: 0.006179  [ 7680/17030]
+Valid! hamming_dts=0.010892, loss=0.000155, acc=0.928346
+loss: 0.007968  [ 8960/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.927935
+loss: 0.016966  [10240/17030]
+Valid! hamming_dts=0.010584, loss=0.000155, acc=0.929716
+loss: 0.006054  [11520/17030]
+Valid! hamming_dts=0.010806, loss=0.000155, acc=0.928483
+loss: 0.003533  [12800/17030]
+Valid! hamming_dts=0.010669, loss=0.000153, acc=0.929579
+loss: 0.006193  [14080/17030]
+Valid! hamming_dts=0.010841, loss=0.000157, acc=0.927661
+loss: 0.006936  [15360/17030]
+Valid! hamming_dts=0.010686, loss=0.000155, acc=0.929579
+loss: 0.006565  [16640/17030]
+Valid! hamming_dts=0.010601, loss=0.000154, acc=0.929990
+Epoch 41
+-------------------------------
+loss: 0.032434  [    0/17030]
+Valid! hamming_dts=0.010772, loss=0.000155, acc=0.928757
+loss: 0.008999  [ 1280/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.930264
+loss: 0.005824  [ 2560/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928483
+loss: 0.011809  [ 3840/17030]
+Valid! hamming_dts=0.010601, loss=0.000154, acc=0.930127
+loss: 0.008535  [ 5120/17030]
+Valid! hamming_dts=0.010430, loss=0.000156, acc=0.931224
+loss: 0.007414  [ 6400/17030]
+Valid! hamming_dts=0.010532, loss=0.000154, acc=0.930812
+loss: 0.008435  [ 7680/17030]
+Valid! hamming_dts=0.010823, loss=0.000157, acc=0.928757
+loss: 0.006466  [ 8960/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929853
+loss: 0.007537  [10240/17030]
+Valid! hamming_dts=0.010721, loss=0.000154, acc=0.929031
+loss: 0.003097  [11520/17030]
+Valid! hamming_dts=0.010806, loss=0.000155, acc=0.928483
+loss: 0.005638  [12800/17030]
+Valid! hamming_dts=0.010995, loss=0.000157, acc=0.927113
+loss: 0.003221  [14080/17030]
+Valid! hamming_dts=0.010464, loss=0.000154, acc=0.930949
+loss: 0.008649  [15360/17030]
+Valid! hamming_dts=0.010584, loss=0.000156, acc=0.930538
+loss: 0.015904  [16640/17030]
+Valid! hamming_dts=0.010995, loss=0.000160, acc=0.927250
+Epoch 42
+-------------------------------
+loss: 0.039854  [    0/17030]
+Valid! hamming_dts=0.011012, loss=0.000155, acc=0.927113
+loss: 0.014096  [ 1280/17030]
+Valid! hamming_dts=0.010601, loss=0.000153, acc=0.930264
+loss: 0.019399  [ 2560/17030]
+Valid! hamming_dts=0.010806, loss=0.000159, acc=0.928483
+loss: 0.007593  [ 3840/17030]
+Valid! hamming_dts=0.010738, loss=0.000162, acc=0.929031
+loss: 0.012844  [ 5120/17030]
+Valid! hamming_dts=0.010823, loss=0.000169, acc=0.928620
+loss: 0.009703  [ 6400/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929990
+loss: 0.013194  [ 7680/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.928757
+loss: 0.004974  [ 8960/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.928209
+loss: 0.008132  [10240/17030]
+Valid! hamming_dts=0.010498, loss=0.000156, acc=0.930949
+loss: 0.006301  [11520/17030]
+Valid! hamming_dts=0.010704, loss=0.000155, acc=0.929442
+loss: 0.008406  [12800/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928757
+loss: 0.011613  [14080/17030]
+Valid! hamming_dts=0.010669, loss=0.000157, acc=0.929716
+loss: 0.006343  [15360/17030]
+Valid! hamming_dts=0.010738, loss=0.000156, acc=0.929031
+loss: 0.002897  [16640/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929853
+Epoch 43
+-------------------------------
+loss: 0.034072  [    0/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.928072
+loss: 0.006095  [ 1280/17030]
+Valid! hamming_dts=0.010618, loss=0.000163, acc=0.929716
+loss: 0.011638  [ 2560/17030]
+Valid! hamming_dts=0.011132, loss=0.000160, acc=0.925880
+loss: 0.008445  [ 3840/17030]
+Valid! hamming_dts=0.010652, loss=0.000155, acc=0.929716
+loss: 0.003210  [ 5120/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928894
+loss: 0.008770  [ 6400/17030]
+Valid! hamming_dts=0.011012, loss=0.000156, acc=0.926702
+loss: 0.006688  [ 7680/17030]
+Valid! hamming_dts=0.010892, loss=0.000155, acc=0.927798
+loss: 0.010273  [ 8960/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.927935
+loss: 0.006298  [10240/17030]
+Valid! hamming_dts=0.010823, loss=0.000154, acc=0.928072
+loss: 0.007206  [11520/17030]
+Valid! hamming_dts=0.010635, loss=0.000155, acc=0.929579
+loss: 0.007398  [12800/17030]
+Valid! hamming_dts=0.010532, loss=0.000154, acc=0.930264
+loss: 0.013734  [14080/17030]
+Valid! hamming_dts=0.010549, loss=0.000155, acc=0.930675
+loss: 0.012588  [15360/17030]
+Valid! hamming_dts=0.010858, loss=0.000154, acc=0.928483
+loss: 0.005266  [16640/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928620
+Epoch 44
+-------------------------------
+loss: 0.052923  [    0/17030]
+Valid! hamming_dts=0.010995, loss=0.000159, acc=0.927113
+loss: 0.005714  [ 1280/17030]
+Valid! hamming_dts=0.010755, loss=0.000158, acc=0.928894
+loss: 0.006152  [ 2560/17030]
+Valid! hamming_dts=0.010978, loss=0.000161, acc=0.927387
+loss: 0.014697  [ 3840/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.929990
+loss: 0.014446  [ 5120/17030]
+Valid! hamming_dts=0.010875, loss=0.000157, acc=0.928346
+loss: 0.007993  [ 6400/17030]
+Valid! hamming_dts=0.010721, loss=0.000157, acc=0.929716
+loss: 0.007275  [ 7680/17030]
+Valid! hamming_dts=0.010943, loss=0.000158, acc=0.927798
+loss: 0.009327  [ 8960/17030]
+Valid! hamming_dts=0.010686, loss=0.000158, acc=0.929853
+loss: 0.006786  [10240/17030]
+Valid! hamming_dts=0.011234, loss=0.000157, acc=0.925332
+loss: 0.004566  [11520/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.929031
+loss: 0.009563  [12800/17030]
+Valid! hamming_dts=0.010721, loss=0.000156, acc=0.929579
+loss: 0.006531  [14080/17030]
+Valid! hamming_dts=0.010481, loss=0.000154, acc=0.931224
+loss: 0.004589  [15360/17030]
+Valid! hamming_dts=0.010721, loss=0.000158, acc=0.929168
+loss: 0.009563  [16640/17030]
+Valid! hamming_dts=0.010789, loss=0.000157, acc=0.929031
+Epoch 45
+-------------------------------
+loss: 0.035082  [    0/17030]
+Valid! hamming_dts=0.010601, loss=0.000153, acc=0.929990
+loss: 0.010615  [ 1280/17030]
+Valid! hamming_dts=0.010652, loss=0.000157, acc=0.929442
+loss: 0.013641  [ 2560/17030]
+Valid! hamming_dts=0.010738, loss=0.000157, acc=0.929305
+loss: 0.011321  [ 3840/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928483
+loss: 0.009204  [ 5120/17030]
+Valid! hamming_dts=0.010755, loss=0.000155, acc=0.929031
+loss: 0.008515  [ 6400/17030]
+Valid! hamming_dts=0.010789, loss=0.000160, acc=0.928894
+loss: 0.006844  [ 7680/17030]
+Valid! hamming_dts=0.010618, loss=0.000157, acc=0.930401
+loss: 0.011707  [ 8960/17030]
+Valid! hamming_dts=0.010926, loss=0.000157, acc=0.927661
+loss: 0.010464  [10240/17030]
+Valid! hamming_dts=0.010532, loss=0.000156, acc=0.930538
+loss: 0.009137  [11520/17030]
+Valid! hamming_dts=0.010960, loss=0.000155, acc=0.927661
+loss: 0.010991  [12800/17030]
+Valid! hamming_dts=0.010789, loss=0.000155, acc=0.928346
+loss: 0.007085  [14080/17030]
+Valid! hamming_dts=0.010909, loss=0.000156, acc=0.927935
+loss: 0.007693  [15360/17030]
+Valid! hamming_dts=0.010721, loss=0.000154, acc=0.929168
+loss: 0.010839  [16640/17030]
+Valid! hamming_dts=0.010378, loss=0.000159, acc=0.931634
+Epoch 46
+-------------------------------
+loss: 0.038432  [    0/17030]
+Valid! hamming_dts=0.010875, loss=0.000156, acc=0.927661
+loss: 0.005315  [ 1280/17030]
+Valid! hamming_dts=0.010892, loss=0.000157, acc=0.928072
+loss: 0.004384  [ 2560/17030]
+Valid! hamming_dts=0.010875, loss=0.000154, acc=0.928072
+loss: 0.006502  [ 3840/17030]
+Valid! hamming_dts=0.010892, loss=0.000156, acc=0.928072
+loss: 0.008389  [ 5120/17030]
+Valid! hamming_dts=0.010892, loss=0.000160, acc=0.928346
+loss: 0.005036  [ 6400/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.929579
+loss: 0.012924  [ 7680/17030]
+Valid! hamming_dts=0.010378, loss=0.000155, acc=0.932046
+loss: 0.005491  [ 8960/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929579
+loss: 0.009792  [10240/17030]
+Valid! hamming_dts=0.010635, loss=0.000155, acc=0.930127
+loss: 0.009287  [11520/17030]
+Valid! hamming_dts=0.010686, loss=0.000155, acc=0.929716
+loss: 0.008107  [12800/17030]
+Valid! hamming_dts=0.010601, loss=0.000155, acc=0.930264
+loss: 0.010616  [14080/17030]
+Valid! hamming_dts=0.010567, loss=0.000155, acc=0.930264
+loss: 0.006198  [15360/17030]
+Valid! hamming_dts=0.010738, loss=0.000156, acc=0.929168
+loss: 0.008344  [16640/17030]
+Valid! hamming_dts=0.010755, loss=0.000153, acc=0.929168
+Epoch 47
+-------------------------------
+loss: 0.036843  [    0/17030]
+Valid! hamming_dts=0.011440, loss=0.000163, acc=0.924099
+loss: 0.005769  [ 1280/17030]
+Valid! hamming_dts=0.010772, loss=0.000154, acc=0.929305
+loss: 0.006612  [ 2560/17030]
+Valid! hamming_dts=0.010892, loss=0.000153, acc=0.928072
+loss: 0.009134  [ 3840/17030]
+Valid! hamming_dts=0.010892, loss=0.000159, acc=0.928620
+loss: 0.013180  [ 5120/17030]
+Valid! hamming_dts=0.010635, loss=0.000160, acc=0.929853
+loss: 0.004706  [ 6400/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929168
+loss: 0.011719  [ 7680/17030]
+Valid! hamming_dts=0.010567, loss=0.000154, acc=0.930127
+loss: 0.010452  [ 8960/17030]
+Valid! hamming_dts=0.010806, loss=0.000157, acc=0.928209
+loss: 0.009186  [10240/17030]
+Valid! hamming_dts=0.010978, loss=0.000154, acc=0.927798
+loss: 0.012880  [11520/17030]
+Valid! hamming_dts=0.010858, loss=0.000154, acc=0.927798
+loss: 0.008447  [12800/17030]
+Valid! hamming_dts=0.010430, loss=0.000155, acc=0.931498
+loss: 0.012680  [14080/17030]
+Valid! hamming_dts=0.010926, loss=0.000155, acc=0.927113
+loss: 0.010460  [15360/17030]
+Valid! hamming_dts=0.010635, loss=0.000157, acc=0.929990
+loss: 0.008512  [16640/17030]
+Valid! hamming_dts=0.010652, loss=0.000156, acc=0.930127
+Epoch 48
+-------------------------------
+loss: 0.051277  [    0/17030]
+Valid! hamming_dts=0.010926, loss=0.000158, acc=0.927524
+loss: 0.004127  [ 1280/17030]
+Valid! hamming_dts=0.010909, loss=0.000158, acc=0.928072
+loss: 0.009030  [ 2560/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928620
+loss: 0.006599  [ 3840/17030]
+Valid! hamming_dts=0.010926, loss=0.000159, acc=0.927661
+loss: 0.010313  [ 5120/17030]
+Valid! hamming_dts=0.010430, loss=0.000154, acc=0.931634
+loss: 0.006438  [ 6400/17030]
+Valid! hamming_dts=0.010738, loss=0.000158, acc=0.929305
+loss: 0.009466  [ 7680/17030]
+Valid! hamming_dts=0.010892, loss=0.000159, acc=0.927935
+loss: 0.003600  [ 8960/17030]
+Valid! hamming_dts=0.010412, loss=0.000155, acc=0.931498
+loss: 0.005799  [10240/17030]
+Valid! hamming_dts=0.010567, loss=0.000154, acc=0.930812
+loss: 0.018822  [11520/17030]
+Valid! hamming_dts=0.010669, loss=0.000156, acc=0.929579
+loss: 0.007782  [12800/17030]
+Valid! hamming_dts=0.011063, loss=0.000157, acc=0.927798
+loss: 0.006075  [14080/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929168
+loss: 0.005068  [15360/17030]
+Valid! hamming_dts=0.010669, loss=0.000155, acc=0.929031
+loss: 0.006510  [16640/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929168
+Epoch 49
+-------------------------------
+loss: 0.038099  [    0/17030]
+Valid! hamming_dts=0.010652, loss=0.000155, acc=0.929442
+loss: 0.008712  [ 1280/17030]
+Valid! hamming_dts=0.010789, loss=0.000156, acc=0.928620
+loss: 0.017185  [ 2560/17030]
+Valid! hamming_dts=0.010652, loss=0.000156, acc=0.929716
+loss: 0.002288  [ 3840/17030]
+Valid! hamming_dts=0.010995, loss=0.000158, acc=0.927113
+loss: 0.013415  [ 5120/17030]
+Valid! hamming_dts=0.010841, loss=0.000155, acc=0.928483
+loss: 0.004886  [ 6400/17030]
+Valid! hamming_dts=0.010858, loss=0.000155, acc=0.928209
+loss: 0.011253  [ 7680/17030]
+Valid! hamming_dts=0.010875, loss=0.000155, acc=0.928209
+loss: 0.015599  [ 8960/17030]
+Valid! hamming_dts=0.010635, loss=0.000158, acc=0.929442
+loss: 0.011574  [10240/17030]
+Valid! hamming_dts=0.010738, loss=0.000153, acc=0.929031
+loss: 0.005735  [11520/17030]
+Valid! hamming_dts=0.010841, loss=0.000156, acc=0.928757
+loss: 0.005784  [12800/17030]
+Valid! hamming_dts=0.010567, loss=0.000159, acc=0.930401
+loss: 0.005452  [14080/17030]
+Valid! hamming_dts=0.010618, loss=0.000155, acc=0.929853
+loss: 0.010746  [15360/17030]
+Valid! hamming_dts=0.010532, loss=0.000153, acc=0.930538
+loss: 0.008797  [16640/17030]
+Valid! hamming_dts=0.010721, loss=0.000153, acc=0.929168
+Epoch 50
+-------------------------------
+loss: 0.034348  [    0/17030]
+Valid! hamming_dts=0.010943, loss=0.000155, acc=0.927250
+loss: 0.011884  [ 1280/17030]
+Valid! hamming_dts=0.010738, loss=0.000155, acc=0.929168
+loss: 0.005861  [ 2560/17030]
+Valid! hamming_dts=0.010995, loss=0.000156, acc=0.926976
+loss: 0.008191  [ 3840/17030]
+Valid! hamming_dts=0.010532, loss=0.000156, acc=0.930264
+loss: 0.010122  [ 5120/17030]
+Valid! hamming_dts=0.010806, loss=0.000156, acc=0.928346
+loss: 0.010190  [ 6400/17030]
+Valid! hamming_dts=0.010686, loss=0.000156, acc=0.928894
+loss: 0.007571  [ 7680/17030]
+Valid! hamming_dts=0.010875, loss=0.000160, acc=0.928072
+loss: 0.017809  [ 8960/17030]
+Valid! hamming_dts=0.010858, loss=0.000154, acc=0.928209
+loss: 0.012947  [10240/17030]
+Valid! hamming_dts=0.010686, loss=0.000163, acc=0.929168
+loss: 0.006715  [11520/17030]
+Valid! hamming_dts=0.010669, loss=0.000156, acc=0.929853
+loss: 0.007553  [12800/17030]
+Valid! hamming_dts=0.010875, loss=0.000154, acc=0.927661
+loss: 0.009090  [14080/17030]
+Valid! hamming_dts=0.010686, loss=0.000154, acc=0.929305
+loss: 0.011142  [15360/17030]
+Valid! hamming_dts=0.010960, loss=0.000157, acc=0.927935
+loss: 0.004223  [16640/17030]
+Valid! hamming_dts=0.010738, loss=0.000157, acc=0.929168
+Test! hamming_dts=0.010768, loss=0.000154, acc=0.930133
+Done!
