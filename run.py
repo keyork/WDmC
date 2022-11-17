@@ -27,6 +27,7 @@ def main(config):
     
     # load model
     device = "cuda" if torch.cuda.is_available() else "cpu"
+    # device = 'cpu'
     print(f"Using {device} device")
     model = WDMCNet()
     print(model)
@@ -42,9 +43,13 @@ def main(config):
     
     # set optim and loss fn
     if config.initmodel:
-        optimizer = optim.Adam(model.parameters(), lr=config.lr)
+        if config.optim == 'adam':
+            optimizer = optim.Adam(model.parameters(), lr=config.lr)
     else:
-        optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=0.0005)
+        if config.optim == 'adam':
+            optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=0.0005)
+        elif config.optim == 'sgd':
+            optimizer = optim.SGD(model.parameters(), lr=config.lr, momentum=0.9, weight_decay=0.0005)
     loss_fn = nn.MSELoss()
     
     if config.target == 'train':
@@ -76,6 +81,7 @@ if __name__ == '__main__':
     parser.add_argument("--saveweights", type=str, default=None, help="save model weights path")
     parser.add_argument("--dataset", type=str, default='base.npz', help="using dataset")
     parser.add_argument("--epoch", type=int, default=5, help="epoch num")
+    parser.add_argument("--optim", type=str, default='adam', help="optimizer(adam or sgd)")
     args = parser.parse_args()
     main(args)
     

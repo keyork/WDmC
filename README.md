@@ -31,7 +31,7 @@ _If you have some problems when installing `PyTorch`, these informations may hel
 
 To install `PyTorch(CPU)`, using: `pip install torch==1.8.0+cpu torchvision==0.9.0+cpu torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`.
 
-To install `PyTorch(GPU)`, you need to know the CUDA Version by using `nvcc -V`, we recommand `CUDA10.1` and `CUDA11.1`, other version may failure when installing you can install CPU Version instead:
+To install `PyTorch(GPU)`, you need to know the CUDA Version by using `nvcc -V`, we recommand `CUDA10.1` and `CUDA11.1`, other version may failure when installing, you can install CPU Version instead:
 
 - `CUDA10.1`: `pip install torch==1.8.0+cu101 torchvision==0.9.0+cu101 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
 - `CUDA11.1`: `pip install torch==1.8.0+cu111 torchvision==0.9.0+cu111 torchaudio==0.8.0 -f https://download.pytorch.org/whl/torch_stable.html`
@@ -50,11 +50,11 @@ mkdir weights
 3. Train a model:
 
 ```
-usage: run.py [-h] [--target TARGET] [--stage STAGE] [--rawpath RAWPATH]
+python run.py [-h] [--target TARGET] [--stage STAGE] [--rawpath RAWPATH]
               [--newpath NEWPATH] [--datadir DATADIR] [--trainscl TRAINSCL]
               [--bts BTS] [--lr LR] [--initmodel INITMODEL] [--loadwt LOADWT]
               [--weights WEIGHTS] [--saveweights SAVEWEIGHTS]
-              [--dataset DATASET] [--epoch EPOCH]
+              [--dataset DATASET] [--epoch EPOCH] [--optim OPTIM]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -74,6 +74,7 @@ optional arguments:
                         save model weights path
   --dataset DATASET     using dataset
   --epoch EPOCH         epoch num
+  --optim OPTIM         optimizer(adam or sgd)
 ```
 
 or run the script directly:
@@ -85,7 +86,7 @@ bash run.sh
 4. Eval the model:
 
 ```
-python run.py --target eval --initmodel False --loadwt True --weights ./weights/model12.pth
+python run.py --target eval --initmodel False --loadwt True --weights ./weights/model13.pth
 ```
 
 We provide a trained model weights here: https://github.com/keyork/WDmC/releases/tag/v1.0.0 or
@@ -95,8 +96,8 @@ Download and put it in `./weights/`, then run this eval project.
 
 ## Eval
 
-- `ACC`: `92.6188%`
-- `AverageHammingDistance`: `0.011487`
+- `ACC`: `93.2435%`
+- `AverageHammingDistance`: `0.010603`
 
 ## Our Model
 
