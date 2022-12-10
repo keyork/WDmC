@@ -1,15 +1,3 @@
-"""
-@ File Name     :   toolbox.py
-@ Time          :   2022/10/11
-@ Author        :   Cheng Kaiyue
-@ Version       :   1.0
-@ Contact       :   chengky18@icloud.com
-@ Description   :   None
-@ Function List :   log_color() -- color
-                    str2bool() -- args
-@ Details       :   None
-"""
-
 import argparse
 import logging
 
