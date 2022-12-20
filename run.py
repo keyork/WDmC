@@ -1,3 +1,16 @@
+"""
+@ File Name     :   run.py
+@ Time          :   2022/12/13
+@ Author        :   Cheng Kaiyue
+@ Version       :   1.0
+@ Contact       :   chengky18@icloud.com
+@ Description   :   None
+@ Function List :   func1() -- func desc1
+@ Class List    :   Class1 -- class1 desc1
+@ Details       :   None
+"""
+
+
 import time
 import torch
 import torch.nn as nn
@@ -5,108 +18,322 @@ import argparse
 import os
 from torch import optim
 from tensorboardX import SummaryWriter
+from linformer import Linformer
 
-from model.wdmcnet import WDMCNet
+from model.wdmcnet import WDmCNetVGG, WDmCNetResNet, WDmCNetTransformer, WDmCNetNeck
 from utils.loaddata import load_train_data, load_test_data
 from utils.split import split_data, get_test_set
-from utils.cfg import train_transform, test_transform
+from utils.cfg import *
 from utils.toolbox import LOGGER, str2bool
 from utils.initweights import init_weights, load_weights
 from train import train
 from eval import test, get_result_file
+
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
-exp_time = time.strftime("%Y%m%d-%H-%M-%S", time.localtime()) 
+exp_time = time.strftime("%Y%m%d-%H-%M-%S", time.localtime())
 
 
 def main(config):
+    # xvgg16 xresnet50 xvit
+    if config.model == "xvgg16":
+        train_transform = train_transform_vgg
+        test_transform = test_transform_vgg
+        model = WDmCNetVGG()
+    elif config.model == "xresnet50":
+        train_transform = train_transform_resnet
+        test_transform = test_transform_resnet
+        model = WDmCNetResNet()
+    elif config.model == "xvit":
+        train_transform = train_transform_vit
+        test_transform = test_transform_vit
+        efficient_transformer = Linformer(
+            dim=128, seq_len=49 + 1, depth=12, heads=8, k=64
+        )
+        model = WDmCNetTransformer(
+            transformer=efficient_transformer,
+        )
+    elif config.model == "neck":
+        # load 3 base models and remove the last layer
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        # load neck model
+        train_transforms = {
+            "raw": train_transform_vgg,
+            "resize": train_transform_resnet,
+        }
+        test_transforms = {"raw": test_transform_vgg, "resize": test_transform_resnet}
+
+        # vgg
+        model_vgg = WDmCNetVGG()
+        load_weights(model_vgg, "./weights/xvgg16/model-full-sgd.pth")
+        model_vgg.classifier[-1] = nn.Sequential()
+        model_vgg.classifier[-2] = nn.Sequential(nn.LeakyReLU(inplace=True))
+        for _, param in enumerate(model_vgg.parameters()):
+            param.requires_grad = False
+
+        # resnet
+        model_resnet = WDmCNetResNet()
+        load_weights(model_resnet, "./weights/xresnet50/model-full-sgd.pth")
+        model_resnet.classifier[-1] = nn.Sequential()
+        model_resnet.classifier[-2] = nn.Sequential(nn.LeakyReLU(inplace=True))
+        for _, param in enumerate(model_resnet.parameters()):
+            param.requires_grad = False
+
+        # vit
+        efficient_transformer = Linformer(
+            dim=128, seq_len=49 + 1, depth=12, heads=8, k=64
+        )
+        model_vit = WDmCNetTransformer(
+            transformer=efficient_transformer,
+        )
+        load_weights(model_vit, "./weights/xvit/model-full-sgd.pth")
+        model_vit.mlp_head[-1] = nn.Sequential()
+        model_vit.mlp_head[-2] = nn.Sequential(nn.LeakyReLU(inplace=True))
+        for _, param in enumerate(model_vit.parameters()):
+            param.requires_grad = False
+
+        base_models = {
+            "xvgg16": model_vgg,
+            "xresnet50": model_resnet,
+            "xvit": model_vit,
+        }
+        model = WDmCNetNeck(base_models)
+
     # check tensorboard dir
-    if not os.path.exists('./runs'):
-        os.mkdir('./runs')
-    if not os.path.exists('./weights'):
-        os.mkdir('./weights')
-    network_writer = SummaryWriter('runs/' + exp_time + '/network')
-    train_loss_writer = SummaryWriter('runs/' + exp_time + '/train_loss')
-    train_acc_writer = SummaryWriter('runs/' + exp_time + '/train_acc')
-    train_dts_writer = SummaryWriter('runs/' + exp_time + '/train_dts')
-    writer_group = {"loss": train_loss_writer, "acc": train_acc_writer, "dts": train_dts_writer}
+    if not os.path.exists("./runs"):
+        os.mkdir("./runs")
+    if not os.path.exists(os.path.join("./runs", config.model)):
+        os.mkdir(os.path.join("./runs", config.model))
+    if not os.path.exists(config.weightsroot):
+        os.mkdir(config.weightsroot)
+    if not os.path.exists(os.path.join(config.weightsroot, config.model)):
+        os.mkdir(os.path.join(config.weightsroot, config.model))
+
+    train_writer = SummaryWriter(
+        os.path.join("./runs", config.model, exp_time, "train")
+    )
+    valid_writer = SummaryWriter(
+        os.path.join("./runs", config.model, exp_time, "valid")
+    )
+    writer_group = {"train": train_writer, "valid": valid_writer}
 
     # load data
-    if config.stage == 'self':
+    if config.stage == "self":
         get_test_set(config.rawpath, config.newpath)
         split_data(config.newpath, config.datadir)
     else:
         split_data(config.rawpath, config.datadir)
     train_dataset_path = os.path.join(config.datadir, config.dataset)
     test_dataset_path = config.newpath
-    train_dataloader, valid_dataloader = load_train_data(config.trainscl, train_dataset_path, train_transform, config.bts)
-    test_dataloader = load_test_data(test_dataset_path, test_transform)
-    
+
+    if config.model != "neck":
+        train_dataloader, valid_dataloader = load_train_data(
+            config.trainscl,
+            train_dataset_path,
+            train_transform,
+            config.bts,
+            is_neck=False,
+        )
+        test_dataloader = load_test_data(
+            test_dataset_path, test_transform, is_neck=False
+        )
+    elif config.model == "neck":
+        train_dataloader, valid_dataloader = load_train_data(
+            config.trainscl,
+            train_dataset_path,
+            train_transforms,
+            config.bts,
+            is_neck=True,
+        )
+        test_dataloader = load_test_data(
+            test_dataset_path, test_transforms, is_neck=True
+        )
     # load model
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # device = 'cpu'
     print(f"Using {device} device")
-    model = WDMCNet()
     print(model)
-    
-    dummy_input = torch.randn(1,1,52,52)
-    network_writer.add_graph(model, (dummy_input, ), True)
-    network_writer.close()
-    
-    if config.target == 'train':
+
+    if config.initmodel:
+        network_writer = SummaryWriter(
+            os.path.join("./runs", config.model, exp_time, "network")
+        )
+        if config.model == "neck":
+            dummy_input = {
+                "raw": torch.randn(1, 1, 52, 52),
+                "resize": torch.randn(1, 1, 224, 224),
+            }
+        elif config.model == "xvgg16":
+            dummy_input = torch.randn(1, 1, 52, 52)
+        else:
+            dummy_input = torch.randn(1, 1, 224, 224)
+        network_writer.add_graph(model, (dummy_input,), True)
+        network_writer.close()
+
+    if config.model == "neck":
+        model_vgg.eval()
+        model_resnet.eval()
+        model_vit.eval()
+        base_models = {
+            "xvgg16": model_vgg.to(device),
+            "xresnet50": model_resnet.to(device),
+            "xvit": model_vit.to(device),
+        }
+        model = WDmCNetNeck(base_models)
+
+    if config.target == "train":
         if config.initmodel:
             model = init_weights(model)
         if config.loadwt:
-            model = load_weights(model, config.weights)
-    elif config.target == 'eval' or config.target == 'eval_save':
-        model = load_weights(model, config.weights)
-    # model = nn.DataParallel(model)
+            model = load_weights(
+                model, os.path.join(config.weightsroot, config.model, config.weights)
+            )
+    elif config.target == "eval" or config.target == "eval_save":
+        model = load_weights(
+            model, os.path.join(config.weightsroot, config.model, config.weights)
+        )
+
     model = model.to(device)
-    
+
     # set optim and loss fn
     if config.initmodel:
-        if config.optim == 'adam':
-            optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=0.0005)
+        if config.optim == "adam":
+            optimizer = optim.Adam(
+                model.parameters(), lr=config.lr, weight_decay=0.0005
+            )
+            if config.model == "xvit":
+                optimizer = optim.Adam(model.parameters(), lr=config.lr)
     else:
-        if config.optim == 'adam':
-            optimizer = optim.Adam(model.parameters(), lr=config.lr, weight_decay=0.0005)
-        elif config.optim == 'sgd':
-            optimizer = optim.SGD(model.parameters(), lr=config.lr, momentum=0.9, weight_decay=0.0005)
+        if config.optim == "adam":
+            optimizer = optim.Adam(
+                model.parameters(), lr=config.lr, weight_decay=0.0005
+            )
+            if config.model == "xvit":
+                optimizer = optim.Adam(model.parameters(), lr=config.lr)
+        elif config.optim == "sgd":
+            optimizer = optim.SGD(
+                model.parameters(), lr=config.lr, momentum=0.9, weight_decay=0.0005
+            )
+            if config.model == "xvit":
+                optimizer = optim.SGD(model.parameters(), lr=config.lr, momentum=0.9)
+            if config.final:
+                optimizer = optim.SGD(
+                    model.parameters(), lr=config.lr, weight_decay=0.000005
+                )
     loss_fn = nn.MSELoss()
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.1, patience=10, verbose=False, threshold=1e-4, threshold_mode='rel', cooldown=3, min_lr=1e-7)
-    if config.target == 'train':
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer,
+        "min",
+        factor=0.1,
+        patience=4,
+        verbose=False,
+        threshold=1e-4,
+        threshold_mode="rel",
+        cooldown=3,
+        min_lr=1e-7,
+    )
+    if config.target == "train":
         # train
         for epoch_idx in range(config.epoch):
             print(f"Epoch {epoch_idx+1}\n-------------------------------")
-            train(model, train_dataloader, valid_dataloader, optimizer, loss_fn, device, writer_group, epoch_idx, scheduler)
-        
-        # test
-        test(test_dataloader, model, device, loss_fn)
-        torch.save(model.state_dict(), config.saveweights)
-        print("Done!")
-    elif config.target == 'eval':
-        test(test_dataloader, model, device, loss_fn)
-    elif config.target == 'eval-save':
-        get_result_file(test_dataloader, model, device, config.result)
+            train(
+                model,
+                train_dataloader,
+                valid_dataloader,
+                optimizer,
+                loss_fn,
+                device,
+                writer_group,
+                epoch_idx,
+                scheduler,
+                is_neck=(config.model == "neck"),
+            )
 
-if __name__ == '__main__':
+        # test
+        test(
+            test_dataloader,
+            model,
+            device,
+            loss_fn,
+            is_neck=(config.model == "neck"),
+        )
+        torch.save(
+            model.state_dict(),
+            os.path.join(config.weightsroot, config.model, config.saveweights),
+        )
+        print("Done!")
+    elif config.target == "eval":
+        test(
+            test_dataloader,
+            model,
+            device,
+            loss_fn,
+            is_neck=(config.model == "neck"),
+        )
+    elif config.target == "eval-save":
+        get_result_file(
+            test_dataloader,
+            model,
+            device,
+            config.result,
+            is_neck=(config.model == "neck"),
+        )
+
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--target", type=str, default='train', help="train or eval")
-    parser.add_argument("--stage", type=str, default='self', help="project stage")
-    parser.add_argument("--rawpath", type=str, default='./data/raw/datasets2022.npz', help="raw data path")
-    parser.add_argument("--newpath", type=str, default='./data/raw/dataset_new.npz', help="new data path")
-    parser.add_argument("--datadir", type=str, default='./data/processed', help="processed data path")
-    parser.add_argument("--trainscl", type=float, default=0.7, help='train dataset scale')
-    parser.add_argument("--bts", type=int, default=64, help='batch size')
-    parser.add_argument("--lr", type=float, default=1e-3, help='learning rate')
-    parser.add_argument("--initmodel", type=str2bool, default=False, help='init the model weights')
-    parser.add_argument("--loadwt", type=str2bool, default=False, help='load model weights')
-    parser.add_argument("--weights", type=str, default=None, help="load model weights path")
-    parser.add_argument("--saveweights", type=str, default=None, help="save model weights path")
-    parser.add_argument("--dataset", type=str, default='base.npz', help="using dataset")
+    parser.add_argument("--target", type=str, default="train", help="train or eval")
+    parser.add_argument("--stage", type=str, default="self", help="project stage")
+    parser.add_argument(
+        "--rawpath",
+        type=str,
+        default="./data/raw/datasets2022.npz",
+        help="raw data path",
+    )
+    parser.add_argument(
+        "--newpath",
+        type=str,
+        default="./data/raw/dataset_new.npz",
+        help="new data path",
+    )
+    parser.add_argument(
+        "--datadir", type=str, default="./data/processed", help="processed data path"
+    )
+    parser.add_argument(
+        "--trainscl", type=float, default=0.7, help="train dataset scale"
+    )
+    parser.add_argument("--bts", type=int, default=64, help="batch size")
+    parser.add_argument("--lr", type=float, default=1e-3, help="learning rate")
+    parser.add_argument(
+        "--initmodel", type=str2bool, default=False, help="init the model weights"
+    )
+    parser.add_argument(
+        "--loadwt", type=str2bool, default=False, help="load model weights"
+    )
+    parser.add_argument(
+        "--weightsroot",
+        type=str,
+        default="./weights/",
+        help="load model weights root path",
+    )
+    parser.add_argument(
+        "--weights", type=str, default=None, help="load model weights path"
+    )
+    parser.add_argument("--model", type=str, default="xvgg16", help="model type")
+    parser.add_argument(
+        "--saveweights", type=str, default=None, help="save model weights path"
+    )
+    parser.add_argument("--dataset", type=str, default="base.npz", help="using dataset")
     parser.add_argument("--epoch", type=int, default=5, help="epoch num")
-    parser.add_argument("--optim", type=str, default='adam', help="optimizer(adam or sgd)")
-    parser.add_argument("--result", type=str, default='./data/result/result.npz', help="result file path")
+    parser.add_argument(
+        "--optim", type=str, default="adam", help="optimizer(adam or sgd)"
+    )
+    parser.add_argument(
+        "--result",
+        type=str,
+        default="./data/result/result.npz",
+        help="result file path",
+    )
+    parser.add_argument("--final", type=str2bool, default=False, help="is the last one")
     args = parser.parse_args()
     main(args)
-    
