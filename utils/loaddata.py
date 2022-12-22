@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 from torch.utils.data import random_split, DataLoader
 from data.dataset import WDmCDataset, WDmCNeckDataset
@@ -45,3 +46,37 @@ def load_test_data(data_path, transform, is_neck):
         pin_memory=True,
     )
     return test_dataloader
+
+
+def load_raw_test_data(data_path, transform, is_neck):
+    """get dataset for getting the final result
+
+    if is_neck is True:
+        we need a list, every element in it is two tensors like:
+                [[1x52x52, 1x224x224], [1x52x52, 1x224x224], ...]
+            1x52x52 is for our model based on VGG16
+            1x224x224 is for our model based on ResNet50 and Vit
+
+    If is_neck is False:
+        we only need 1x52x52, others are the same as above
+
+    Args:
+        data_path (_type_): _description_
+        transform (_type_): _description_
+        is_neck (bool): _description_
+    """
+    raw_data = np.load(data_path)
+    test_data = raw_data["test"]
+    final_dataloader = []
+    if is_neck:
+        for img in test_data:
+            final_dataloader.append(
+                {
+                    "raw": transform["raw"](img).unsqueeze(0),
+                    "resize": transform["resize"](img).unsqueeze(0),
+                }
+            )
+    else:
+        for img in test_data:
+            final_dataloader.append(transform(img).unsqueeze(0))
+    return final_dataloader

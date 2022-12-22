@@ -92,3 +92,24 @@ def get_result_file(dataloader, model, device, target_path, is_neck):
                     final_result = np.vstack((final_result, result))
                     final_data = np.vstack((final_data, X))
     np.savez(target_path, test=final_data, result=final_result)
+
+
+def get_result_file_raw(dataloader, model, device, target_path, is_neck):
+    print("Test!")
+    model.eval()
+    test_num = len(dataloader)
+    if is_neck:
+        for idx in tqdm(range(test_num), ncols=70):
+            X = dataloader[idx]
+            X["raw"] = X["raw"].to(device)
+            X["resize"] = X["resize"].to(device)
+            pred = model(X)
+            result = 1.0 * (pred >= 0.5)
+            if device == "cuda":
+                result = result.cpu()
+            result = result.numpy()
+            if idx == 0:
+                final_result = result
+            else:
+                final_result = np.vstack((final_result, result))
+    np.savetxt(target_path, final_result, fmt="%d", delimiter=",")

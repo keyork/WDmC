@@ -35,11 +35,13 @@ source activate mlbd
 
 # neck
 
-python -u run.py --lr 1e-3 --initmodel True --loadwt False --weightsroot ./weights --weights None --model neck --saveweights model-full-stage1.pth --dataset full.npz --epoch 5 --bts 128
-python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage1.pth --model neck --saveweights model-full-stage2.pth --dataset full.npz --epoch 25 --bts 128
-python -u run.py --lr 1e-5 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage2.pth --model neck --saveweights model-full-stage3.pth --dataset full.npz --epoch 25 --bts 128
-python -u run.py --lr 1e-3 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage3.pth --model neck --saveweights model-full-sgd.pth --dataset full.npz --epoch 50 --optim sgd --bts 128
-python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-sgd.pth --model neck --saveweights model-full-final.pth --dataset full.npz --epoch 30 --optim sgd --bts 128 --final True
-python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final.pth --model neck --saveweights model-full-final-2.pth --dataset full.npz --epoch 20 --optim sgd --bts 64 --final True
+# python -u run.py --lr 1e-3 --initmodel True --loadwt False --weightsroot ./weights --weights None --model neck --saveweights model-full-stage1.pth --dataset full.npz --epoch 5 --bts 128
+# python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage1.pth --model neck --saveweights model-full-stage2.pth --dataset full.npz --epoch 25 --bts 128
+# python -u run.py --lr 1e-5 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage2.pth --model neck --saveweights model-full-stage3.pth --dataset full.npz --epoch 25 --bts 128
+# python -u run.py --lr 1e-3 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-stage3.pth --model neck --saveweights model-full-sgd.pth --dataset full.npz --epoch 50 --optim sgd --bts 128
+# python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-sgd.pth --model neck --saveweights model-full-final.pth --dataset full.npz --epoch 30 --optim sgd --bts 128 --final True
+# python -u run.py --lr 1e-4 --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final.pth --model neck --saveweights model-full-final-2.pth --dataset full.npz --epoch 20 --optim sgd --bts 64 --final True
 
-python -u run.py --target eval --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck
+# python -u run.py --target eval --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck
+
+python -u run.py --target eval --stage final-test --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck --result ./data/result/Group5.csv

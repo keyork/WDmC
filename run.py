@@ -21,13 +21,13 @@ from tensorboardX import SummaryWriter
 from linformer import Linformer
 
 from model.wdmcnet import WDmCNetVGG, WDmCNetResNet, WDmCNetTransformer, WDmCNetNeck
-from utils.loaddata import load_train_data, load_test_data
+from utils.loaddata import load_train_data, load_test_data, load_raw_test_data
 from utils.split import split_data, get_test_set
 from utils.cfg import *
 from utils.toolbox import LOGGER, str2bool
 from utils.initweights import init_weights, load_weights
 from train import train
-from eval import test, get_result_file
+from eval import test, get_result_file, get_result_file_raw
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
@@ -121,33 +121,40 @@ def main(config):
     if config.stage == "self":
         get_test_set(config.rawpath, config.newpath)
         split_data(config.newpath, config.datadir)
-    else:
+    elif config.stage == "raw-train":
         split_data(config.rawpath, config.datadir)
-    train_dataset_path = os.path.join(config.datadir, config.dataset)
-    test_dataset_path = config.newpath
 
-    if config.model != "neck":
-        train_dataloader, valid_dataloader = load_train_data(
-            config.trainscl,
-            train_dataset_path,
-            train_transform,
-            config.bts,
-            is_neck=False,
-        )
-        test_dataloader = load_test_data(
-            test_dataset_path, test_transform, is_neck=False
-        )
-    elif config.model == "neck":
-        train_dataloader, valid_dataloader = load_train_data(
-            config.trainscl,
-            train_dataset_path,
-            train_transforms,
-            config.bts,
-            is_neck=True,
-        )
-        test_dataloader = load_test_data(
-            test_dataset_path, test_transforms, is_neck=True
-        )
+    if config.stage == "final-test":
+        if config.model != "neck":
+            final_dataloader = load_raw_test_data(config.rawpath, test_transform, False)
+        elif config.model == "neck":
+            final_dataloader = load_raw_test_data(config.rawpath, test_transforms, True)
+    else:
+        train_dataset_path = os.path.join(config.datadir, config.dataset)
+        test_dataset_path = config.newpath
+
+        if config.model != "neck":
+            train_dataloader, valid_dataloader = load_train_data(
+                config.trainscl,
+                train_dataset_path,
+                train_transform,
+                config.bts,
+                is_neck=False,
+            )
+            test_dataloader = load_test_data(
+                test_dataset_path, test_transform, is_neck=False
+            )
+        elif config.model == "neck":
+            train_dataloader, valid_dataloader = load_train_data(
+                config.trainscl,
+                train_dataset_path,
+                train_transforms,
+                config.bts,
+                is_neck=True,
+            )
+            test_dataloader = load_test_data(
+                test_dataset_path, test_transforms, is_neck=True
+            )
     # load model
     device = "cuda" if torch.cuda.is_available() else "cpu"
     # device = 'cpu'
@@ -232,58 +239,69 @@ def main(config):
         cooldown=3,
         min_lr=1e-7,
     )
-    if config.target == "train":
-        # train
-        for epoch_idx in range(config.epoch):
-            print(f"Epoch {epoch_idx+1}\n-------------------------------")
-            train(
+    if config.stage == "final-test":
+        get_result_file_raw(
+            final_dataloader, model, device, config.result, (config.model == "neck")
+        )
+        pass
+    else:
+        if config.target == "train":
+            # train
+            for epoch_idx in range(config.epoch):
+                print(f"Epoch {epoch_idx+1}\n-------------------------------")
+                train(
+                    model,
+                    train_dataloader,
+                    valid_dataloader,
+                    optimizer,
+                    loss_fn,
+                    device,
+                    writer_group,
+                    epoch_idx,
+                    scheduler,
+                    is_neck=(config.model == "neck"),
+                )
+
+            # test
+            test(
+                test_dataloader,
                 model,
-                train_dataloader,
-                valid_dataloader,
-                optimizer,
-                loss_fn,
                 device,
-                writer_group,
-                epoch_idx,
-                scheduler,
+                loss_fn,
                 is_neck=(config.model == "neck"),
             )
-
-        # test
-        test(
-            test_dataloader,
-            model,
-            device,
-            loss_fn,
-            is_neck=(config.model == "neck"),
-        )
-        torch.save(
-            model.state_dict(),
-            os.path.join(config.weightsroot, config.model, config.saveweights),
-        )
-        print("Done!")
-    elif config.target == "eval":
-        test(
-            test_dataloader,
-            model,
-            device,
-            loss_fn,
-            is_neck=(config.model == "neck"),
-        )
-    elif config.target == "eval-save":
-        get_result_file(
-            test_dataloader,
-            model,
-            device,
-            config.result,
-            is_neck=(config.model == "neck"),
-        )
+            torch.save(
+                model.state_dict(),
+                os.path.join(config.weightsroot, config.model, config.saveweights),
+            )
+            print("Done!")
+        elif config.target == "eval":
+            test(
+                test_dataloader,
+                model,
+                device,
+                loss_fn,
+                is_neck=(config.model == "neck"),
+            )
+        elif config.target == "eval-save":
+            get_result_file(
+                test_dataloader,
+                model,
+                device,
+                config.result,
+                is_neck=(config.model == "neck"),
+            )
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--target", type=str, default="train", help="train or eval")
-    parser.add_argument("--stage", type=str, default="self", help="project stage")
+    parser.add_argument(
+        "--stage",
+        type=str,
+        default="self",
+        help="project stage, self/raw-train/final-test",
+    )
     parser.add_argument(
         "--rawpath",
         type=str,
