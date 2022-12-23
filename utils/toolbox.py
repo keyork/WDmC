@@ -1,3 +1,14 @@
+"""
+@ File Name     :   toolbox.py
+@ Time          :   2022/12/13
+@ Author        :   Cheng Kaiyue
+@ Version       :   1.0
+@ Contact       :   chengky18@icloud.com
+@ Description   :   useful toooooooools
+@ Function List :   log_color() -- show log in different colors
+                    str2bool() -- convert string to bool
+"""
+
 import argparse
 import logging
 

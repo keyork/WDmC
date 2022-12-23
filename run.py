@@ -4,47 +4,63 @@
 @ Author        :   Cheng Kaiyue
 @ Version       :   1.0
 @ Contact       :   chengky18@icloud.com
-@ Description   :   None
-@ Function List :   func1() -- func desc1
-@ Class List    :   Class1 -- class1 desc1
-@ Details       :   None
+@ Description   :   main function
+@ Function List :   main() -- main function
 """
 
 
-import time
-import torch
-import torch.nn as nn
 import argparse
 import os
-from torch import optim
-from tensorboardX import SummaryWriter
+import time
+
+import torch
+import torch.nn as nn
+from eval import get_result_file, get_result_file_raw, test
 from linformer import Linformer
-
-from model.wdmcnet import WDmCNetVGG, WDmCNetResNet, WDmCNetTransformer, WDmCNetNeck
-from utils.loaddata import load_train_data, load_test_data, load_raw_test_data
-from utils.split import split_data, get_test_set
-from utils.cfg import *
-from utils.toolbox import LOGGER, str2bool
-from utils.initweights import init_weights, load_weights
+from model.wdmcnet import WDmCNetNeck, WDmCNetResNet, WDmCNetTransformer, WDmCNetVGG
+from tensorboardX import SummaryWriter
+from torch import optim
 from train import train
-from eval import test, get_result_file, get_result_file_raw
+from utils.cfg import *
+from utils.initweights import init_weights, load_weights
+from utils.loaddata import load_raw_test_data, load_test_data, load_train_data
+from utils.split import get_test_set, split_data
+from utils.toolbox import LOGGER, str2bool
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+# GPU ID
+# default: 0
+# if you have multiple GPUs and want to select the specific one, set this num
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
+# record the time when the program starting
 exp_time = time.strftime("%Y%m%d-%H-%M-%S", time.localtime())
 
 
 def main(config):
+    """main entry
+
+    Args:
+        config (args): args list
+    """
+
     # xvgg16 xresnet50 xvit
+    #
+    # because the input size of vgg16 is 1x52x52
+    # and the input size of resnet50 and vit is 1x224x224
+    #
+    # so we need different transform, and load different model
     if config.model == "xvgg16":
+        # vgg16
         train_transform = train_transform_vgg
         test_transform = test_transform_vgg
         model = WDmCNetVGG()
     elif config.model == "xresnet50":
+        # resnet50
         train_transform = train_transform_resnet
         test_transform = test_transform_resnet
         model = WDmCNetResNet()
     elif config.model == "xvit":
+        # transformer (vit)
         train_transform = train_transform_vit
         test_transform = test_transform_vit
         efficient_transformer = Linformer(
@@ -54,8 +70,11 @@ def main(config):
             transformer=efficient_transformer,
         )
     elif config.model == "neck":
+        # final neck
+        #
         # load 3 base models and remove the last layer
         device = "cuda" if torch.cuda.is_available() else "cpu"
+
         # load neck model
         train_transforms = {
             "raw": train_transform_vgg,
@@ -63,7 +82,7 @@ def main(config):
         }
         test_transforms = {"raw": test_transform_vgg, "resize": test_transform_resnet}
 
-        # vgg
+        # load vgg16
         model_vgg = WDmCNetVGG()
         load_weights(model_vgg, "./weights/xvgg16/model-full-sgd.pth")
         model_vgg.classifier[-1] = nn.Sequential()
@@ -71,7 +90,7 @@ def main(config):
         for _, param in enumerate(model_vgg.parameters()):
             param.requires_grad = False
 
-        # resnet
+        # load resnet50
         model_resnet = WDmCNetResNet()
         load_weights(model_resnet, "./weights/xresnet50/model-full-sgd.pth")
         model_resnet.classifier[-1] = nn.Sequential()
@@ -79,7 +98,7 @@ def main(config):
         for _, param in enumerate(model_resnet.parameters()):
             param.requires_grad = False
 
-        # vit
+        # load vit
         efficient_transformer = Linformer(
             dim=128, seq_len=49 + 1, depth=12, heads=8, k=64
         )
@@ -109,6 +128,7 @@ def main(config):
     if not os.path.exists(os.path.join(config.weightsroot, config.model)):
         os.mkdir(os.path.join(config.weightsroot, config.model))
 
+    # tensorboard writer
     train_writer = SummaryWriter(
         os.path.join("./runs", config.model, exp_time, "train")
     )
@@ -117,22 +137,31 @@ def main(config):
     )
     writer_group = {"train": train_writer, "valid": valid_writer}
 
-    # load data
+    # make fake dataset (train + test)
+    # split dataset according to the num of defects
     if config.stage == "self":
         get_test_set(config.rawpath, config.newpath)
         split_data(config.newpath, config.datadir)
     elif config.stage == "raw-train":
         split_data(config.rawpath, config.datadir)
 
+    # load dataset
     if config.stage == "final-test":
+        # final test
+        # dataset file -> list [data1, data2, data3, ...]
         if config.model != "neck":
             final_dataloader = load_raw_test_data(config.rawpath, test_transform, False)
         elif config.model == "neck":
             final_dataloader = load_raw_test_data(config.rawpath, test_transforms, True)
     else:
+        # others: train and self test (using fake dataset)
+        # dataset file -> dataloader provided by PyTorch
         train_dataset_path = os.path.join(config.datadir, config.dataset)
         test_dataset_path = config.newpath
 
+        # the differences between neck and others is:
+        # 1. transform
+        # 2. dataloader
         if config.model != "neck":
             train_dataloader, valid_dataloader = load_train_data(
                 config.trainscl,
@@ -155,12 +184,13 @@ def main(config):
             test_dataloader = load_test_data(
                 test_dataset_path, test_transforms, is_neck=True
             )
+
     # load model
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    # device = 'cpu'
     print(f"Using {device} device")
     print(model)
 
+    # draw the model using tensorboard
     if config.initmodel:
         network_writer = SummaryWriter(
             os.path.join("./runs", config.model, exp_time, "network")
@@ -177,6 +207,10 @@ def main(config):
         network_writer.add_graph(model, (dummy_input,), True)
         network_writer.close()
 
+    # rebuild the neck model
+    # @remark: tensorboard only accept data in CPU device
+    #           so we can't use .to(decive) before draw the model by tensorboard
+    #           after drawing, we rebuild the model and put it in device
     if config.model == "neck":
         model_vgg.eval()
         model_resnet.eval()
@@ -188,6 +222,7 @@ def main(config):
         }
         model = WDmCNetNeck(base_models)
 
+    # load weights or init weights
     if config.target == "train":
         if config.initmodel:
             model = init_weights(model)
@@ -202,7 +237,7 @@ def main(config):
 
     model = model.to(device)
 
-    # set optim and loss fn
+    # set optimizer, loss function and learning rate scheduler
     if config.initmodel:
         if config.optim == "adam":
             optimizer = optim.Adam(
@@ -239,7 +274,9 @@ def main(config):
         cooldown=3,
         min_lr=1e-7,
     )
+    # test, train or eval
     if config.stage == "final-test":
+        # test, get final submit file (.csv)
         get_result_file_raw(
             final_dataloader, model, device, config.result, (config.model == "neck")
         )
@@ -276,6 +313,7 @@ def main(config):
             )
             print("Done!")
         elif config.target == "eval":
+            # eval
             test(
                 test_dataloader,
                 model,
@@ -284,6 +322,7 @@ def main(config):
                 is_neck=(config.model == "neck"),
             )
         elif config.target == "eval-save":
+            # eval (deprecated)
             get_result_file(
                 test_dataloader,
                 model,
@@ -306,16 +345,16 @@ if __name__ == "__main__":
         "--rawpath",
         type=str,
         default="./data/raw/datasets2022.npz",
-        help="raw data path",
+        help="raw dataset path",
     )
     parser.add_argument(
         "--newpath",
         type=str,
         default="./data/raw/dataset_new.npz",
-        help="new data path",
+        help="new dataset path",
     )
     parser.add_argument(
-        "--datadir", type=str, default="./data/processed", help="processed data path"
+        "--datadir", type=str, default="./data/processed", help="processed dataset path"
     )
     parser.add_argument(
         "--trainscl", type=float, default=0.7, help="train dataset scale"
@@ -323,10 +362,13 @@ if __name__ == "__main__":
     parser.add_argument("--bts", type=int, default=64, help="batch size")
     parser.add_argument("--lr", type=float, default=1e-3, help="learning rate")
     parser.add_argument(
-        "--initmodel", type=str2bool, default=False, help="init the model weights"
+        "--initmodel",
+        type=str2bool,
+        default=False,
+        help="init the model weights (True/False)",
     )
     parser.add_argument(
-        "--loadwt", type=str2bool, default=False, help="load model weights"
+        "--loadwt", type=str2bool, default=False, help="load model weights (True/False)"
     )
     parser.add_argument(
         "--weightsroot",
@@ -337,14 +379,16 @@ if __name__ == "__main__":
     parser.add_argument(
         "--weights", type=str, default=None, help="load model weights path"
     )
-    parser.add_argument("--model", type=str, default="xvgg16", help="model type")
+    parser.add_argument(
+        "--model", type=str, default="xvgg16", help="model type (xvgg16/xresnet50/xvit)"
+    )
     parser.add_argument(
         "--saveweights", type=str, default=None, help="save model weights path"
     )
-    parser.add_argument("--dataset", type=str, default="base.npz", help="using dataset")
+    parser.add_argument("--dataset", type=str, default="full.npz", help="using dataset")
     parser.add_argument("--epoch", type=int, default=5, help="epoch num")
     parser.add_argument(
-        "--optim", type=str, default="adam", help="optimizer(adam or sgd)"
+        "--optim", type=str, default="adam", help="optimizer (adam or sgd)"
     )
     parser.add_argument(
         "--result",
@@ -352,6 +396,8 @@ if __name__ == "__main__":
         default="./data/result/result.npz",
         help="result file path",
     )
-    parser.add_argument("--final", type=str2bool, default=False, help="is the last one")
+    parser.add_argument(
+        "--final", type=str2bool, default=False, help="is the last one (True/False)"
+    )
     args = parser.parse_args()
     main(args)

@@ -1,3 +1,16 @@
+'''
+@ File Name     :   loaddata.py
+@ Time          :   2022/12/13
+@ Author        :   Cheng Kaiyue
+@ Version       :   1.0
+@ Contact       :   chengky18@icloud.com
+@ Description   :   None
+@ Function List :   func1() -- func desc1
+@ Class List    :   Class1 -- class1 desc1
+@ Details       :   None
+'''
+
+
 import numpy as np
 import torch
 from torch.utils.data import random_split, DataLoader
@@ -68,6 +81,7 @@ def load_raw_test_data(data_path, transform, is_neck):
     raw_data = np.load(data_path)
     test_data = raw_data["test"]
     final_dataloader = []
+
     if is_neck:
         for img in test_data:
             final_dataloader.append(

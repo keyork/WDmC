@@ -44,4 +44,4 @@ source activate mlbd
 
 # python -u run.py --target eval --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck
 
-python -u run.py --target eval --stage final-test --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck --result ./data/result/Group5.csv
+# python -u run.py --target eval --stage final-test --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck --result ./data/result/Group5.csv

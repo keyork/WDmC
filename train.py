@@ -1,3 +1,13 @@
+"""
+@ File Name     :   train.py
+@ Time          :   2022/12/13
+@ Author        :   Cheng Kaiyue
+@ Version       :   1.0
+@ Contact       :   chengky18@icloud.com
+@ Description   :   train and valid the model
+@ Function List :   train() -- train function
+"""
+
 import torch
 
 
@@ -13,8 +23,22 @@ def train(
     scheduler,
     is_neck,
 ):
+    """train function
 
-    # Train
+    Args:
+        model (nn.Module): deep learning model to train
+        train_loader (DataLoader): training dataloader
+        valid_loader (DataLoader): validing dataloader
+        optimizer (optim): deep learning optimizer
+        loss_fn (loss): deep learning loss function
+        device (device): data and model device
+        writer_group (tensorboard writer): tensorboard writer
+        epoch_idx (int): the index of epoch
+        scheduler (learning rate scheduler): scheduler
+        is_neck (bool): is neck model or not
+    """
+
+    # params used by tensorboard
     valid_dts = 0
     valid_times = 0
     batch_gap = 20
@@ -29,11 +53,11 @@ def train(
             model.train()
             X, y = X.to(device), y.to(device)
 
-            # Compute prediction error
+            # compute prediction error
             pred = model(X)
             loss = loss_fn(pred, y.float())
 
-            # Backpropagation
+            # back propagation
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -73,7 +97,7 @@ def train(
                     epoch_idx * size + (batch + 1) * len(X),
                 )
 
-                # Valid
+                # valid
 
                 print("Valid! ", end="")
                 val_size = len(valid_loader.dataset)
@@ -85,7 +109,7 @@ def train(
                     for batch_val, (X, y) in enumerate(valid_loader):
                         X, y = X.to(device), y.to(device)
 
-                        # Compute prediction error
+                        # compute prediction error
                         pred = model(X)
                         result = 1.0 * (pred >= 0.5)
                         corr += (
@@ -122,11 +146,11 @@ def train(
             model.train()
             X1, X2, y = X1.to(device), X2.to(device), y.to(device)
             X = {"raw": X1, "resize": X2}
-            # Compute prediction error
+            # compute prediction error
             pred = model(X)
             loss = loss_fn(pred, y.float())
 
-            # Backpropagation
+            # back propagation
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
@@ -166,7 +190,7 @@ def train(
                     epoch_idx * size + (batch + 1) * len(X1),
                 )
 
-                # Valid
+                # valid
 
                 print("Valid! ", end="")
                 val_size = len(valid_loader.dataset)
@@ -178,7 +202,7 @@ def train(
                     for batch_val, (X1, X2, y) in enumerate(valid_loader):
                         X1, X2, y = X1.to(device), X2.to(device), y.to(device)
                         X = {"raw": X1, "resize": X2}
-                        # Compute prediction error
+                        # compute prediction error
                         pred = model(X)
                         result = 1.0 * (pred >= 0.5)
                         corr += (

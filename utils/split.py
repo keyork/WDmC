@@ -1,9 +1,28 @@
+"""
+@ File Name     :   split.py
+@ Time          :   2022/12/16
+@ Author        :   Cheng Kaiyue
+@ Version       :   1.0
+@ Contact       :   chengky18@icloud.com
+@ Description   :   init and process dataset file
+@ Function List :   split_data() -- split the full dataset according to the num of defects
+                    get_test_set() -- make fake test dataset (contain label)
+"""
+
 import os
 import shutil
 import numpy as np
 
 
 def split_data(raw_path, target_dir):
+    """split dataset
+
+    Args:
+        raw_path (str): raw dataset file path
+        target_dir (str): target dataset dir
+
+
+    """
 
     raw_data = np.load(raw_path)
     train_data = raw_data["train"]
