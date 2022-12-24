@@ -115,3 +115,38 @@ Download and put it in `./weights/`, then run this eval project.
 ## Our Model
 
 We train three different models independently, and use a neck model to combine them.
+
+![model-img](./data/readme-img/model-report.png)
+
+### Transform
+
+- Transform 1
+  - train
+    - RandomHorizontalFlip, p=0.4
+    - RandomVerticalFlip, p=0.4
+    - RandomRotation, degree=45
+    - Normalize, mean=0.5, std=0.5
+  - test
+    - Normalize, mean=0.5, std=0.5
+- Transform 2
+  - train
+    - Resize -> (224,224)
+    - RandomHorizontalFlip, p=0.4
+    - RandomVerticalFlip, p=0.4
+    - RandomRotation, degree=45
+    - Normalize, mean=0.5, std=0.5
+  - test
+    - Resize -> (224,224)
+    - Normalize, mean=0.5, std=0.5
+
+Above all, Transform 2 is the same as Transform 1 except **resize**
+
+### Model ABC
+
+Model A is based on vgg16, Model B is based on ResNet50, Model C is based on Vit(Transformer).
+
+We cut the model from the last two layer and get a (1x64) feature for each, and these three features can be used in the next stage.
+
+### Neck Model
+
+![neck-img](./data/readme-img/neck.png)
