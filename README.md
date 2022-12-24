@@ -116,7 +116,7 @@ Download and put it in `./weights/`, then run this eval project.
 
 We train three different models independently, and use a neck model to combine them.
 
-![model-img](./data/readme-img/model-report.png)
+![model-img](./data/readme-img/model-img.png)
 
 ### Transform
 
@@ -149,4 +149,4 @@ We cut the model from the last two layer and get a (1x64) feature for each, and 
 
 ### Neck Model
 
-![neck-img](./data/readme-img/neck.png)
+![neck-img](./data/readme-img/neck-img.png)
