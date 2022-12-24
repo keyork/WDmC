@@ -41,40 +41,48 @@ To install `PyTorch(GPU)`, you need to know the CUDA Version by using `nvcc -V`,
 1. Make sure all path are exist, if not, create it:
 
 ```
-cd data && mkdir processed && mkdir raw && cd ..
-mkdir weights
+mkdir data && cd data && mkdir processed && mkdir raw && mkdir result && cd ..
+mkdir weights && mkdir runs
 ```
+
+Update: the program can create the dir automatically.
 
 2. Download `datasets2022.npz` and put it in `./data/raw/`
 
 3. Train a model:
 
 ```
-python run.py [-h] [--target TARGET] [--stage STAGE] [--rawpath RAWPATH]
+usage: run.py [-h] [--target TARGET] [--stage STAGE] [--rawpath RAWPATH]
               [--newpath NEWPATH] [--datadir DATADIR] [--trainscl TRAINSCL]
               [--bts BTS] [--lr LR] [--initmodel INITMODEL] [--loadwt LOADWT]
-              [--weights WEIGHTS] [--saveweights SAVEWEIGHTS]
-              [--dataset DATASET] [--epoch EPOCH] [--optim OPTIM]
+              [--weightsroot WEIGHTSROOT] [--weights WEIGHTS] [--model MODEL]
+              [--saveweights SAVEWEIGHTS] [--dataset DATASET] [--epoch EPOCH]
+              [--optim OPTIM] [--result RESULT] [--final FINAL]
 
 optional arguments:
   -h, --help            show this help message and exit
   --target TARGET       train or eval
-  --stage STAGE         project stage
-  --rawpath RAWPATH     raw data path
-  --newpath NEWPATH     new data path
-  --datadir DATADIR     processed data path
+  --stage STAGE         project stage, self/raw-train/final-test
+  --rawpath RAWPATH     raw dataset path
+  --newpath NEWPATH     new dataset path
+  --datadir DATADIR     processed dataset path
   --trainscl TRAINSCL   train dataset scale
   --bts BTS             batch size
   --lr LR               learning rate
   --initmodel INITMODEL
-                        init the model weights
-  --loadwt LOADWT       load model weights
+                        init the model weights (True/False)
+  --loadwt LOADWT       load model weights (True/False)
+  --weightsroot WEIGHTSROOT
+                        load model weights root path
   --weights WEIGHTS     load model weights path
+  --model MODEL         model type (xvgg16/xresnet50/xvit)
   --saveweights SAVEWEIGHTS
                         save model weights path
   --dataset DATASET     using dataset
   --epoch EPOCH         epoch num
-  --optim OPTIM         optimizer(adam or sgd)
+  --optim OPTIM         optimizer (adam or sgd)
+  --result RESULT       result file path
+  --final FINAL         is the last one (True/False)
 ```
 
 or run the script directly:
@@ -86,19 +94,24 @@ bash run.sh
 4. Eval the model:
 
 ```
-python run.py --target eval --initmodel False --loadwt True --weights ./weights/model13.pth
+python -u run.py --target eval --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck
 ```
 
-We provide a trained model weights here: https://github.com/keyork/WDmC/releases/tag/v1.0.0 or
-https://cloud.tsinghua.edu.cn/f/7e40d23a599f49bd930e/
+or get the result file (.csv):
+
+```
+python -u run.py --target eval --stage final-test --initmodel False --loadwt True --weightsroot ./weights --weights model-full-final-2.pth --model neck --result ./data/result/Group5.csv
+```
+
+We provide a trained model weights here: https://github.com/keyork/WDmC/releases/tag/v2.0.0
 
 Download and put it in `./weights/`, then run this eval project.
 
 ## Eval
 
-- `ACC`: `93.2435%`
-- `AverageHammingDistance`: `0.010603`
+- `ACC`: `98.6191%`
+- `AverageHammingDistance`: `0.002199`
 
 ## Our Model
 
-TODO.
+We train three different models independently, and use a neck model to combine them.

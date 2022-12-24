@@ -21,7 +21,18 @@ def split_data(raw_path, target_dir):
         raw_path (str): raw dataset file path
         target_dir (str): target dataset dir
 
+    the dataset contains different nums of defects in image, it
+    is hard to train the model if we use the raw dataset directly,
+    so we split the dataset according to the nums of defects like:
 
+        0 defect, 1 defect -> base-dataset
+        2 defect -> double-dataset
+        0, 1, 2 defects -> bd-dataset
+        3+ defects -> multi-dataset
+
+    * how to do this
+    count the "1" in a sample's label using np.sum(axis=1)
+    and according the num of "1" to split the dataset
     """
 
     raw_data = np.load(raw_path)
@@ -78,7 +89,24 @@ def split_data(raw_path, target_dir):
 
 
 def get_test_set(raw_path, target_path, scale=0.8):
+    """make fake test dataset
 
+    Args:
+        raw_path (str): raw dataset file path
+        target_path (str): target dataset file path
+        scale (float, optional): the scale of train data. Defaults to 0.8.
+
+    the raw dataset doesn't contain the label of test data,
+    we want to evaluate our model like the final test, so we
+    make fake test dataset from raw dataset
+
+    * how to do this
+    random select the {scale} data in raw dataset's train as this train data,
+    others are fake test data
+
+    * [important]
+    the model must not get in touch with test data while training
+    """
     raw_data = np.load(raw_path)
     train_data = raw_data["train"]
     train_label = raw_data["label_train"]

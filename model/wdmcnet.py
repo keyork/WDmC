@@ -1,24 +1,27 @@
-'''
+"""
 @ File Name     :   wdmcnet.py
 @ Time          :   2022/12/13
 @ Author        :   Cheng Kaiyue
 @ Version       :   1.0
 @ Contact       :   chengky18@icloud.com
-@ Description   :   None
-@ Function List :   func1() -- func desc1
-@ Class List    :   Class1 -- class1 desc1
-@ Details       :   None
-'''
+@ Description   :   deep learning model
+@ Class List    :   WDmCNetVGG -- our model based on vgg16
+                    WDmCNetResNet -- our model based on resnet50
+                    WDmCNetTransformer -- our model based on vit (transformer)
+                    WDmCNetNeck -- our neck model
+"""
 
 import torch
 import torch.nn as nn
-from einops import rearrange, repeat
+from einops import repeat
 from einops.layers.torch import Rearrange
 from .resnetbox import Block
 from .transformerbox import pair
 
 
 class WDmCNetVGG(nn.Module):
+    """model based on vgg16"""
+
     def __init__(self, num_classes: int = 8):
         super(WDmCNetVGG, self).__init__()
         self.features = nn.Sequential(
@@ -63,6 +66,8 @@ Layers = [3, 4, 6, 3]
 
 
 class WDmCNetResNet(nn.Module):
+    """model based on resnet50"""
+
     def __init__(self, num_classes: int = 8):
         super(WDmCNetResNet, self).__init__()
         self.features = nn.Sequential(
@@ -103,6 +108,8 @@ class WDmCNetResNet(nn.Module):
 
 
 class WDmCNetTransformer(nn.Module):
+    """model based on transformer (vit)"""
+
     def __init__(
         self,
         *,
@@ -156,6 +163,15 @@ class WDmCNetTransformer(nn.Module):
 
 
 class WDmCNetNeck(nn.Module):
+    """neck model
+
+    we have already got three model based on vgg16, resnet50 and vit
+    the hypothesis is:
+        different model learn different knowledge from the dataset
+
+    we want to combine these knowledge, and we make this neck model
+    """
+
     def __init__(self, base_models, num_classes: int = 8):
         super(WDmCNetNeck, self).__init__()
         self.base_models = base_models

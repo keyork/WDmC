@@ -4,10 +4,9 @@
 @ Author        :   Cheng Kaiyue
 @ Version       :   1.0
 @ Contact       :   chengky18@icloud.com
-@ Description   :   None
-@ Function List :   func1() -- func desc1
-@ Class List    :   Class1 -- class1 desc1
-@ Details       :   None
+@ Description   :   dataset
+@ Class List    :   WDmCDataset -- dataset
+                    WDmCNeckDataset -- neck model dataset
 """
 
 import numpy as np
@@ -15,6 +14,8 @@ from torch.utils.data import Dataset
 
 
 class WDmCDataset(Dataset):
+    """load normal dataset from file -> PyTorch DataSet"""
+
     def __init__(
         self,
         data_path,
@@ -50,6 +51,8 @@ class WDmCDataset(Dataset):
 
 
 class WDmCNeckDataset(Dataset):
+    """load neck model dataset from file -> PyTorch DataSet"""
+
     def __init__(
         self,
         data_path,

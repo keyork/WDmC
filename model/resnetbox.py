@@ -4,10 +4,8 @@
 @ Author        :   Cheng Kaiyue
 @ Version       :   1.0
 @ Contact       :   chengky18@icloud.com
-@ Description   :   None
-@ Function List :   func1() -- func desc1
-@ Class List    :   Class1 -- class1 desc1
-@ Details       :   None
+@ Description   :   ResNet Block
+@ Class List    :   Block -- ResNet Block
 """
 
 
@@ -15,6 +13,8 @@ import torch.nn as nn
 
 
 class Block(nn.Module):
+    """ResNet Block"""
+
     def __init__(self, in_channels, filter_group, stride=1, is_11conv=False):
         super(Block, self).__init__()
 
