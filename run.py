@@ -43,12 +43,15 @@ def main(config):
         config (args): args list
     """
 
+    LOGGER.warning("Start")
+
     # xvgg16 xresnet50 xvit
     #
     # because the input size of vgg16 is 1x52x52
     # and the input size of resnet50 and vit is 1x224x224
     #
     # so we need different transform, and load different model
+    LOGGER.info("Create Model")
     if config.model == "xvgg16":
         # vgg16
         train_transform = train_transform_vgg
@@ -73,6 +76,8 @@ def main(config):
         # final neck
         #
         # load 3 base models and remove the last layer
+
+        LOGGER.info("Init Neck-Model")
         device = "cuda" if torch.cuda.is_available() else "cpu"
 
         # load neck model
@@ -118,6 +123,7 @@ def main(config):
         }
         model = WDmCNetNeck(base_models)
 
+    LOGGER.info("Init Path")
     # check tensorboard dir
     if not os.path.exists("./runs"):
         os.mkdir("./runs")
@@ -127,6 +133,7 @@ def main(config):
         os.mkdir(config.weightsroot)
     if not os.path.exists(os.path.join(config.weightsroot, config.model)):
         os.mkdir(os.path.join(config.weightsroot, config.model))
+    print("init weights path -> {}".format(os.path.join("./runs", config.model)))
 
     # tensorboard writer
     train_writer = SummaryWriter(
@@ -136,7 +143,13 @@ def main(config):
         os.path.join("./runs", config.model, exp_time, "valid")
     )
     writer_group = {"train": train_writer, "valid": valid_writer}
+    print(
+        "Init tensorboard path -> {}".format(
+            os.path.join("./runs", config.model, exp_time)
+        )
+    )
 
+    LOGGER.info("Process DataSet")
     # make fake dataset (train + test)
     # split dataset according to the num of defects
     if config.stage == "self":
@@ -185,13 +198,22 @@ def main(config):
                 test_dataset_path, test_transforms, is_neck=True
             )
 
+    LOGGER.info("Set Device")
     # load model
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Using {device} device")
+
+    LOGGER.info("Model Framework")
     print(model)
 
     # draw the model using tensorboard
     if config.initmodel:
+        LOGGER.info("Draw the Model by Tensorboard")
+        print(
+            "network -> {}".format(
+                os.path.join("./runs", config.model, exp_time, "network")
+            )
+        )
         network_writer = SummaryWriter(
             os.path.join("./runs", config.model, exp_time, "network")
         )
@@ -212,6 +234,7 @@ def main(config):
     #           so we can't use .to(decive) before draw the model by tensorboard
     #           after drawing, we rebuild the model and put it in device
     if config.model == "neck":
+        LOGGER.info("Rebuild the Neck-Model")
         model_vgg.eval()
         model_resnet.eval()
         model_vit.eval()
@@ -223,6 +246,7 @@ def main(config):
         model = WDmCNetNeck(base_models)
 
     # load weights or init weights
+    LOGGER.info("Process Weight")
     if config.target == "train":
         if config.initmodel:
             model = init_weights(model)
@@ -238,8 +262,10 @@ def main(config):
     model = model.to(device)
 
     # set optimizer, loss function and learning rate scheduler
+    LOGGER.info("Set optimizer, loss function and learning rate scheduler")
     if config.initmodel:
         if config.optim == "adam":
+            print("Using Adam optim")
             optimizer = optim.Adam(
                 model.parameters(), lr=config.lr, weight_decay=0.0005
             )
@@ -247,12 +273,14 @@ def main(config):
                 optimizer = optim.Adam(model.parameters(), lr=config.lr)
     else:
         if config.optim == "adam":
+            print("Using Adam optim")
             optimizer = optim.Adam(
                 model.parameters(), lr=config.lr, weight_decay=0.0005
             )
             if config.model == "xvit":
                 optimizer = optim.Adam(model.parameters(), lr=config.lr)
         elif config.optim == "sgd":
+            print("Using SGD optim")
             optimizer = optim.SGD(
                 model.parameters(), lr=config.lr, momentum=0.9, weight_decay=0.0005
             )
@@ -263,6 +291,7 @@ def main(config):
                     model.parameters(), lr=config.lr, weight_decay=0.000005
                 )
     loss_fn = nn.MSELoss()
+    print("Using MSE Loss")
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(
         optimizer,
         "min",
@@ -274,9 +303,12 @@ def main(config):
         cooldown=3,
         min_lr=1e-7,
     )
+    print("Using ReduceLROnPlateau lr_scheduler")
+
     # test, train or eval
     if config.stage == "final-test":
         # test, get final submit file (.csv)
+        LOGGER.info("Final Test (get result file)")
         get_result_file_raw(
             final_dataloader, model, device, config.result, (config.model == "neck")
         )
@@ -284,6 +316,7 @@ def main(config):
     else:
         if config.target == "train":
             # train
+            LOGGER.info("Train")
             for epoch_idx in range(config.epoch):
                 print(f"Epoch {epoch_idx+1}\n-------------------------------")
                 train(
@@ -300,6 +333,7 @@ def main(config):
                 )
 
             # test
+            LOGGER.info("Test")
             test(
                 test_dataloader,
                 model,
@@ -311,9 +345,15 @@ def main(config):
                 model.state_dict(),
                 os.path.join(config.weightsroot, config.model, config.saveweights),
             )
+            LOGGER.info(
+                "Save model -> {}".format(
+                    os.path.join(config.weightsroot, config.model, config.saveweights)
+                )
+            )
             print("Done!")
         elif config.target == "eval":
             # eval
+            LOGGER.info("Eval")
             test(
                 test_dataloader,
                 model,
@@ -330,6 +370,7 @@ def main(config):
                 config.result,
                 is_neck=(config.model == "neck"),
             )
+    LOGGER.warning("Done")
 
 
 if __name__ == "__main__":

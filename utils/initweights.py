@@ -42,5 +42,6 @@ def load_weights(model, path):
     Returns:
         model (nn.Module): deep learning model after load weights
     """
+    print("load weights from <- {}".format(path))
     model.load_state_dict(torch.load(path))
     return model

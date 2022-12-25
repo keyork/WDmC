@@ -43,7 +43,7 @@ To install `PyTorch(GPU)`, you need to know the CUDA Version by using `nvcc -V`,
 1. Make sure all path are exist, if not, create it:
 
 ```
-mkdir data && cd data && mkdir processed && mkdir raw && mkdir result && cd ..
+cd data && mkdir processed && mkdir raw && mkdir result && cd ..
 mkdir weights && mkdir runs
 ```
 

@@ -30,6 +30,7 @@ def load_train_data(train_scale, data_path, transform, batch_size, is_neck):
     Returns:
         train_dataloader, valid_dataloader: two dataloaders
     """
+    print("load train data from <- {}".format(data_path))
     if is_neck:
         training_dataset = WDmCNeckDataset(data_path, transform, None, "train")
     else:
@@ -69,6 +70,7 @@ def load_test_data(data_path, transform, is_neck):
     Returns:
         test_dataloader: test dataloader
     """
+    print("load test data from <- {}".format(data_path))
     if is_neck:
         test_dataset = WDmCNeckDataset(data_path, transform, None, "test_self")
     else:
@@ -101,6 +103,7 @@ def load_raw_test_data(data_path, transform, is_neck):
     if is_neck is false:
         we only need 1x52x52, others are the same as above
     """
+    print("load raw test data from <- {}".format(data_path))
     raw_data = np.load(data_path)
     test_data = raw_data["test"]
     final_dataloader = []

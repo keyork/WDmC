@@ -34,7 +34,7 @@ def split_data(raw_path, target_dir):
     count the "1" in a sample's label using np.sum(axis=1)
     and according the num of "1" to split the dataset
     """
-
+    print("split dataset according to the num of defects")
     raw_data = np.load(raw_path)
     train_data = raw_data["train"]
     train_label = raw_data["label_train"]
@@ -64,6 +64,8 @@ def split_data(raw_path, target_dir):
             train=base_data,
             label_train=base_label,
         )
+    else:
+        print("{} already exists".format(os.path.join(target_dir, "base.npz")))
     if not os.path.exists(os.path.join(target_dir, "double.npz")):
         print("{} -> {}".format(raw_path, os.path.join(target_dir, "double.npz")))
         np.savez(
@@ -71,6 +73,8 @@ def split_data(raw_path, target_dir):
             train=double_data,
             label_train=double_label,
         )
+    else:
+        print("{} already exists".format(os.path.join(target_dir, "double.npz")))
     if not os.path.exists(os.path.join(target_dir, "multi.npz")):
         print("{} -> {}".format(raw_path, os.path.join(target_dir, "multi.npz")))
         np.savez(
@@ -78,14 +82,20 @@ def split_data(raw_path, target_dir):
             train=multi_data,
             label_train=multi_label,
         )
+    else:
+        print("{} already exitst".format(os.path.join(target_dir, "multi.npz")))
     if not os.path.exists(os.path.join(target_dir, "bd.npz")):
         print("{} -> {}".format(raw_path, os.path.join(target_dir, "bd.npz")))
         np.savez(
             os.path.join(target_dir, "bd.npz"), train=b_d_data, label_train=b_d_label
         )
+    else:
+        print("{} already exists".format(os.path.join(target_dir, "bd.npz")))
     if not os.path.exists(os.path.join(target_dir, "full.npz")):
         print("{} -> {}".format(raw_path, os.path.join(target_dir, "full.npz")))
         shutil.copyfile(raw_path, os.path.join(target_dir, "full.npz"))
+    else:
+        print("{} already exists".format(os.path.join(target_dir, "full.npz")))
 
 
 def get_test_set(raw_path, target_path, scale=0.8):
@@ -107,6 +117,7 @@ def get_test_set(raw_path, target_path, scale=0.8):
     * [important]
     the model must not get in touch with test data while training
     """
+    print("make fake test dataset")
     raw_data = np.load(raw_path)
     train_data = raw_data["train"]
     train_label = raw_data["label_train"]
@@ -128,3 +139,5 @@ def get_test_set(raw_path, target_path, scale=0.8):
             test=spt_test_data,
             label_test=spt_test_label,
         )
+    else:
+        print("{} already exists".format(target_path))

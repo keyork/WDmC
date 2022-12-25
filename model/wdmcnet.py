@@ -24,6 +24,7 @@ class WDmCNetVGG(nn.Module):
 
     def __init__(self, num_classes: int = 8):
         super(WDmCNetVGG, self).__init__()
+        print("Create Model based on VGG16")
         self.features = nn.Sequential(
             nn.Conv2d(1, 64, kernel_size=3, stride=1, padding=1),
             nn.ReLU(inplace=True),
@@ -70,6 +71,7 @@ class WDmCNetResNet(nn.Module):
 
     def __init__(self, num_classes: int = 8):
         super(WDmCNetResNet, self).__init__()
+        print("Create Model based on ResNet50")
         self.features = nn.Sequential(
             # conv1
             nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
@@ -122,6 +124,7 @@ class WDmCNetTransformer(nn.Module):
         channels=1
     ):
         super().__init__()
+        print("Create Model based on Transformer")
         image_size_h, image_size_w = pair(image_size)
         num_patches = (image_size_h // patch_size) * (image_size_w // patch_size)
         patch_dim = channels * patch_size**2
@@ -174,6 +177,7 @@ class WDmCNetNeck(nn.Module):
 
     def __init__(self, base_models, num_classes: int = 8):
         super(WDmCNetNeck, self).__init__()
+        print("Create Neck-Model")
         self.base_models = base_models
         self.base2neckxvgg16 = nn.Sequential(
             nn.Linear(64, 1024), nn.LeakyReLU(inplace=True)
